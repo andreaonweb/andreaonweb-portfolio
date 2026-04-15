@@ -6,8 +6,8 @@ Este proyecto muestra mis habilidades como desarrolladora frontend y está estru
 ---
 
 ## 🚀 Demo
- 
-https://andreaonweb-portfolio.vercel.app 
+
+[aonweb-portfolio.vercel.app](https://aonweb-portfolio.vercel.app)
 
 ---
 
@@ -23,20 +23,21 @@ https://andreaonweb-portfolio.vercel.app
 ---
 
 ## 📁 Estructura del proyecto
+
+```
 src/
 ├── app/
-│ ├── components/
-│ │ ├── navbar/
-│ │ ├── hero/
-│ │ ├── about/
-│ │ ├── skills/
-│ │ ├── projects/
-│ │ └── contact/
-│ ├── app.component.*
-│
+│   ├── components/
+│   │   ├── navbar/
+│   │   ├── hero/
+│   │   ├── about/
+│   │   ├── skills/
+│   │   ├── projects/
+│   │   └── contact/
+│   └── app.component.*
 ├── styles.scss
 └── index.html
-
+```
 
 ---
 
@@ -62,37 +63,63 @@ src/
 
 ```bash
 git clone https://github.com/andreaonweb/andreaonweb-portfolio.git
+```
 
-2. Entrar en la carpeta
+### 2. Entrar en la carpeta
+
+```bash
 cd andreaonweb-portfolio
-3. Instalar dependencias
+```
+
+### 3. Instalar dependencias
+
+```bash
 npm install
-4. Ejecutar en local
+```
+
+### 4. Ejecutar en local
+
+```bash
 ng serve
-5. Abrir en el navegador
+```
+
+### 5. Abrir en el navegador
+
+```
 http://localhost:4200
-🚀 Build para producción
+```
+
+---
+
+## 🚀 Build para producción
+
+```bash
 ng build
+```
 
-Los archivos generados estarán en la carpeta /dist.
+Los archivos generados estarán en la carpeta `/dist`.
 
-📦 Deploy
+---
+
+## 📦 Deploy
 
 Este proyecto está preparado para desplegarse fácilmente en:
 
-Vercel
-Netlify
-Firebase Hosting
-👩‍💻 Autor
-
-Andrea
-Frontend Developer 💻
-GitHub: https://github.com/andreaonweb
-
-📌 Notas
-
-Este portfolio está en constante mejora.
-Se irán añadiendo nuevas animaciones, mejoras de UI y optimización de rendimiento.
-
+- Vercel
+- Netlify
+- Firebase Hosting
 
 ---
+
+## 👩‍💻 Autor
+
+**Andrea**  
+Frontend Developer 💻  
+GitHub: [https://github.com/andreaonweb](https://github.com/andreaonweb)
+
+---
+
+## 📌 Notas
+
+- Este portfolio está en constante mejora.
+- Se irán añadiendo nuevas animaciones, mejoras de UI y optimización de rendimiento.
