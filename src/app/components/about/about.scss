@@ -1,0 +1,46 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 48px;
+  align-items: start;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+
+  .text p {
+    margin-bottom: 16px;
+    color: #ccc;
+
+    strong {
+      color: var(--color-accent);
+    }
+  }
+
+  .hobbies {
+    font-size: 1.1rem;
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .stat {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 16px;
+
+    .num {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      color: var(--color-accent);
+    }
+
+    .label {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+  }
+}

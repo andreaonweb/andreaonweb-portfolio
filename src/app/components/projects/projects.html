@@ -1,0 +1,50 @@
+<section id="projects">
+  <h2>Proyectos</h2>
+  <div class="grid">
+    <div class="card" *ngFor="let p of projects">
+
+      <div class="card-header">
+        <svg *ngIf="p.icon === 'social'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3" />
+          <circle cx="6" cy="12" r="3" />
+          <circle cx="18" cy="19" r="3" />
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+        </svg>
+        <svg *ngIf="p.icon === 'med'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7.07-7.07l7 7a5 5 0 0 1-7.07 7.07z" />
+          <line x1="9" y1="9" x2="15" y2="15" />
+        </svg>
+        <svg *ngIf="p.icon === 'paws'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 5.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+          <path d="M18 5.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+          <path d="M7 10.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+          <path d="M21 10.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+          <path d="M12 13c-3 0-6 2-6 4.5C6 20 8.5 22 12 22s6-2 6-4.5C18 15 15 13 12 13z" />
+        </svg>
+        <span class="name">{{ p.name }}</span>
+      </div>
+
+      <p class="desc">{{ p.description }}</p>
+
+      <div class="tech-list">
+        <span *ngFor="let t of p.tech">{{ t }}</span>
+      </div>
+
+      <div class="repo-links">
+        <span class="repo-label">Repos:</span>
+        <a *ngFor="let r of p.repos" [href]="r.url" target="_blank" rel="noopener">
+          {{ r.label }} ↗
+        </a>
+      </div>
+
+      <div class="actions">
+        <a class="btn-demo" [href]="p.vercel" target="_blank" rel="noopener">Ver demo ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>

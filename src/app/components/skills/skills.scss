@@ -1,0 +1,21 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  transition: all 0.2s;
+  cursor: default;
+
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: rgba(245, 230, 66, 0.05);
+  }
+}

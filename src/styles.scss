@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --color-bg: #0a0a0a;
+  --color-surface: #111111;
+  --color-border: #222222;
+  --color-accent: #f5e642;
+  --color-text: #f0f0f0;
+  --color-muted: #888888;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-main: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+section {
+  padding: 80px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  color: var(--color-accent);
+  margin-bottom: 2rem;
+
+  &::before {
+    content: '> ';
+    opacity: 0.5;
+  }
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
