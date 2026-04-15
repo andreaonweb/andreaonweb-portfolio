@@ -1,9 +1,22 @@
 <nav [class.scrolled]="scrolled">
   <a class="logo" href="#hero">aonweb</a>
-  <ul>
-    <li><a href="#about">Sobre mí</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Proyectos</a></li>
-    <li><a href="#contact">Contacto</a></li>
+
+  <button
+    class="nav-toggle"
+    [class.open]="menuOpen"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="menuOpen"
+    aria-label="Abrir menú"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul [class.open]="menuOpen">
+    <li><a href="#about"    (click)="closeMenu()">Sobre mí</a></li>
+    <li><a href="#skills"   (click)="closeMenu()">Skills</a></li>
+    <li><a href="#projects" (click)="closeMenu()">Proyectos</a></li>
+    <li><a href="#contact"  (click)="closeMenu()">Contacto</a></li>
   </ul>
 </nav>

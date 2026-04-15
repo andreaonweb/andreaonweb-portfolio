@@ -1,7 +1,11 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr; 
+  }
 }
 
 .card {
@@ -23,11 +27,6 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 12px;
-
-    .icon {
-      color: var(--color-accent);
-      font-size: 1.1rem;
-    }
 
     .name {
       font-weight: 600;
@@ -113,9 +112,7 @@
     background: var(--color-accent);
     color: var(--color-bg, #0d0d0d);
 
-    &:hover {
-      opacity: 0.85;
-    }
+    &:hover { opacity: 0.85; }
   }
 
   .btn-repo {

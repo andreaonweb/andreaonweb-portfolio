@@ -4,22 +4,14 @@
   gap: 48px;
   align-items: start;
 
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
-
   .text p {
     margin-bottom: 16px;
     color: #ccc;
 
-    strong {
-      color: var(--color-accent);
-    }
+    strong { color: var(--color-accent); }
   }
 
-  .hobbies {
-    font-size: 1.1rem;
-  }
+  .hobbies { font-size: 1.1rem; }
 
   .stats {
     display: flex;
@@ -41,6 +33,27 @@
     .label {
       font-size: 0.85rem;
       color: var(--color-muted);
+    }
+  }
+
+  // ── Responsive ───────────────────────────────
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+
+    .hobbies { font-size: 1rem; }
+
+    .stats {
+      flex-direction: row; 
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 100px;
+
+      .num { font-size: 1.6rem; }
     }
   }
 }

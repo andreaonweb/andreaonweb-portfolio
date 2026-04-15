@@ -76,16 +76,28 @@ section {
       text-decoration: none;
     }
   }
+
+  // ── Responsive ───────────────────────────────
+  @media (max-width: 768px) {
+    padding-top: 100px;
+
+    .description {
+      font-size: 0.95rem;
+      br { display: none; } 
+    }
+
+    .cta {
+      flex-direction: column;
+
+      .btn-primary,
+      .btn-ghost {
+        text-align: center;
+      }
+    }
+  }
 }
 
 @keyframes blink {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
