@@ -1,5 +1,5 @@
 <section id="projects">
-  <h2>Proyectos</h2>
+  <h2>Proyectos destacados</h2>
   <div class="grid">
     <div class="card" *ngFor="let p of projects">
 
@@ -26,6 +26,7 @@
           <path d="M12 13c-3 0-6 2-6 4.5C6 20 8.5 22 12 22s6-2 6-4.5C18 15 15 13 12 13z" />
         </svg>
         <span class="name">{{ p.name }}</span>
+        <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>
       </div>
 
       <p class="desc">{{ p.description }}</p>

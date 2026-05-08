@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgIf],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
@@ -15,6 +15,7 @@ export class ProjectsComponent {
       description: 'Aplicación fullstack de temática sociopolítica con autenticación y gestión de usuarios.',
       tech: ['React', 'Java', 'Spring Boot', 'PostgreSQL', 'JWT'],
       icon: 'social',
+      badge: null,
       vercel: 'https://reverso-social-web.vercel.app',
       repos: [
         { label: 'Frontend', url: 'https://github.com/andreaonweb/reverso-social-fe' },
@@ -26,6 +27,7 @@ export class ProjectsComponent {
       description: 'App para la gestión de medicación. Semifinalistas en Hackathon Sanitas 2025.',
       tech: ['React.js', 'Tailwind CSS', 'Vite', 'Axios', 'Vitest'],
       icon: 'med',
+      badge: '🏆 Hackathon Sanitas 2025',
       vercel: 'https://recuerdamed-web.vercel.app',
       repos: [
         { label: 'Frontend', url: 'https://github.com/andreaonweb/RecuerdaMed-FrontEnd' }
@@ -33,9 +35,10 @@ export class ProjectsComponent {
     },
     {
       name: 'The Shire of Paws',
-      description: 'Explora perros en adopción y gestiona solicitudes.',
+      description: 'Explora perros en adopción y gestiona solicitudes de acogida.',
       tech: ['React', 'CSS Modules', 'Spring Boot', 'PostgreSQL', 'Axios'],
       icon: 'paws',
+      badge: null,
       vercel: 'https://the-shire-of-paws-fe.vercel.app',
       repos: [
         { label: 'Frontend', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Frontend' },

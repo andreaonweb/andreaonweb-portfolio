@@ -1,59 +1,181 @@
-.about-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 48px;
-  align-items: start;
+.about-intro {
+  max-width: 680px;
+  margin-bottom: 48px;
 
-  .text p {
+  p {
     margin-bottom: 16px;
     color: #ccc;
+    font-size: 1.05rem;
+    line-height: 1.8;
 
-    strong { color: var(--color-accent); }
+    strong {
+      color: var(--color-accent);
+    }
   }
 
-  .hobbies { font-size: 1.1rem; }
-
-  .stats {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  .hobbies {
+    font-size: 1rem;
+    color: var(--color-muted);
   }
+}
+
+// ── Stats row ──────────────────────────────────────────
+.stats-row {
+  display: flex;
+  gap: 0;
+  margin-bottom: 72px;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
 
   .stat {
-    border-left: 2px solid var(--color-accent);
-    padding-left: 16px;
+    flex: 1;
+    padding: 24px 20px;
+    border-right: 1px solid var(--color-border);
+    transition: background 0.2s;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &:hover {
+      background: var(--color-accent-dim);
+    }
 
     .num {
       display: block;
       font-family: var(--font-mono);
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--color-accent);
+      line-height: 1.1;
+      margin-bottom: 6px;
     }
 
     .label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--color-muted);
+      line-height: 1.4;
     }
   }
 
-  // ── Responsive ───────────────────────────────
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 32px;
-
-    .hobbies { font-size: 1rem; }
-
-    .stats {
-      flex-direction: row; 
-      flex-wrap: wrap;
-      gap: 16px;
-    }
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
 
     .stat {
-      flex: 1;
-      min-width: 100px;
-
-      .num { font-size: 1.6rem; }
+      flex: 1 1 calc(50% - 0px);
+      border-bottom: 1px solid var(--color-border);
     }
+  }
+}
+
+// ── Timeline ───────────────────────────────────────────
+.timeline-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  opacity: 0.6;
+}
+
+.tl-track {
+  position: relative;
+  padding-left: 32px;
+
+  // La línea vertical continua
+  &::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--color-border);
+  }
+}
+
+.tl-item {
+  position: relative;
+  padding: 0 0 48px 36px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  // El punto en la línea
+  .tl-dot {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-bg, #0a0a0a);
+    border: 2px solid var(--color-border);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    z-index: 1;
+  }
+
+  &:hover .tl-dot {
+    border-color: var(--color-muted);
+  }
+
+  // Fecha
+  .tl-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    opacity: 0.7;
+  }
+
+  // Contenido
+  .tl-content {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+  }
+
+  // ── Variante destacada (Factoría + FP Dual) ──────────
+  &.tl-highlight {
+    .tl-dot {
+      width: 16px;
+      height: 16px;
+      left: -1px;
+      top: 5px;
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 4px var(--color-accent-dim, rgba(99, 255, 180, 0.12));
+    }
+
+    .tl-date {
+      color: var(--color-accent);
+      opacity: 1;
+    }
+
+    .tl-content h4 {
+      color: var(--color-accent);
+    }
+
+    &:hover .tl-dot {
+      box-shadow: 0 0 0 6px var(--color-accent-dim, rgba(99, 255, 180, 0.18));
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding-left: 28px;
+    padding-bottom: 36px;
   }
 }

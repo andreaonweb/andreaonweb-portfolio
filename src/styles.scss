@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --color-bg: #0a0a0a;
   --color-surface: #111111;
+  --color-surface-2: #161616;
   --color-border: #222222;
-  --color-accent: #f5e642;
+  --color-accent: #b48fff;
+  --color-accent-dim: rgba(180, 143, 255, 0.12);
+  --color-accent-glow: rgba(180, 143, 255, 0.25);
   --color-text: #f0f0f0;
   --color-muted: #888888;
   --font-mono: 'Share Tech Mono', monospace;
@@ -30,8 +33,8 @@ body {
 }
 
 section {
-  padding: 80px 24px;
-  max-width: 900px;
+  padding: 100px 24px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -39,7 +42,7 @@ h2 {
   font-family: var(--font-mono);
   font-size: 1.6rem;
   color: var(--color-accent);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 
   &::before {
     content: '> ';

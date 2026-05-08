@@ -1,6 +1,9 @@
 <section id="skills">
   <h2>Stack</h2>
-  <div class="tags">
-    <span class="tag" *ngFor="let skill of skills">{{ skill }}</span>
+  <div class="skills-grid">
+    <div class="skill-item" *ngFor="let skill of skills">
+      <div class="skill-icon" [innerHTML]="skill.svg"></div>
+      <span class="skill-name">{{ skill.name }}</span>
+    </div>
   </div>
 </section>
