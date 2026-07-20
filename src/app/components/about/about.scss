@@ -81,17 +81,16 @@
 .tl-track {
   position: relative;
   padding-left: 32px;
+}
 
-  // La línea vertical continua
-  &::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: var(--color-border);
-  }
+.tl-line {
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--gradient-primary);
+  transform-origin: top;
 }
 
 .tl-item {
