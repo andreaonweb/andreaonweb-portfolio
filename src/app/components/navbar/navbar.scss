@@ -18,14 +18,15 @@ nav {
   }
 
   .logo {
-    font-family: var(--font-mono);
-    font-size: 1.2rem;
-    color: var(--color-accent);
-    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
     z-index: 110;
 
-    &::before { content: '['; }
-    &::after  { content: ']'; }
+    img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
   }
 
   .nav-toggle {
@@ -77,7 +78,7 @@ nav {
       }
 
       &.active {
-        color: var(--color-accent-2);
+        color: var(--color-accent);
       }
     }
 
