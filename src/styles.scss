@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --color-bg: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-2: #161616;
-  --color-border: #222222;
-  --color-accent: #b48fff;
-  --color-accent-dim: rgba(180, 143, 255, 0.12);
-  --color-accent-glow: rgba(180, 143, 255, 0.25);
+  --color-bg: #08080f;
+  --color-surface: #0f0f1a;
+  --color-surface-2: #14141f;
+  --color-border: #22222f;
+  --color-accent: #a78bfa;
+  --color-accent-2: #60a5fa;
+  --color-accent-dim: rgba(167, 139, 250, 0.12);
+  --color-accent-glow: rgba(167, 139, 250, 0.25);
+  --gradient-primary: linear-gradient(135deg, var(--color-accent-2), var(--color-accent));
   --color-text: #f0f0f0;
   --color-muted: #888888;
   --font-mono: 'Share Tech Mono', monospace;
