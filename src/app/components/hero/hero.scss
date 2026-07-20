@@ -1,4 +1,48 @@
 section {
+  overflow: hidden;
+
+  .hero-blobs {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+  }
+
+  .blob-purple {
+    width: 380px;
+    height: 380px;
+    top: -80px;
+    right: 0;
+    background: var(--color-accent);
+  }
+
+  .blob-blue {
+    width: 320px;
+    height: 320px;
+    bottom: -60px;
+    left: -40px;
+    background: var(--color-accent-2);
+  }
+
+  .hero-tag, .pre-title, h1, .tagline, .description, .cta, .hero-scroll {
+    position: relative;
+    z-index: 1;
+  }
+
+  .name-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -72,7 +116,7 @@ section {
 
   .btn-primary {
     padding: 14px 32px;
-    background: var(--color-accent);
+    background: var(--gradient-primary);
     color: #000;
     font-weight: 700;
     font-family: var(--font-mono);
