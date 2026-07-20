@@ -67,7 +67,7 @@ export class NavbarComponent {
 
   private moveIndicator() {
     if (!this.indicator) return;
-    const active = this.el.nativeElement.querySelector<HTMLElement>('a.active');
+    const active = this.el.nativeElement.querySelector<HTMLElement>(`a[href="#${this.activeSection}"]`);
 
     if (!active) {
       gsap.to(this.indicator, { opacity: 0, duration: 0.2 });
