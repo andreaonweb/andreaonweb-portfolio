@@ -60,6 +60,18 @@ export class ProjectsComponent {
       repos: [
         { label: 'Repositorio', url: 'https://github.com/SavePoint-App/SavePoint-App' }
       ]
+    },
+    {
+      name: 'Shirayuki Pâtisserie',
+      description: 'E-commerce de repostería japonesa artesanal con carrito reactivo, panel de administración y buses cercanos en tiempo real.',
+      tech: ['Angular', 'TypeScript', 'Firebase', 'Firestore', 'SCSS'],
+      icon: 'cake',
+      badge: null,
+      image: 'projects/shirayuki.png',
+      vercel: 'https://shirayuki-patisserie.vercel.app',
+      repos: [
+        { label: 'Repositorio', url: 'https://github.com/andreaonweb/Shirayuki_Patisserie' }
+      ]
     }
   ];
 }
