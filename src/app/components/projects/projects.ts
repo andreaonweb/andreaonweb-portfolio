@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, ScrollRevealDirective],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
