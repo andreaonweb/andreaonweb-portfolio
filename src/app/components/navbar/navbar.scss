@@ -63,6 +63,7 @@ nav {
     list-style: none;
     display: flex;
     gap: 32px;
+    position: relative;
 
     a {
       font-size: 0.9rem;
@@ -74,6 +75,20 @@ nav {
         color: var(--color-accent);
         text-decoration: none;
       }
+
+      &.active {
+        color: var(--color-accent-2);
+      }
+    }
+
+    .nav-indicator {
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      opacity: 0;
+      pointer-events: none;
     }
   }
 
@@ -105,6 +120,10 @@ nav {
       }
 
       a { font-size: 1.4rem; letter-spacing: 3px; }
+
+      .nav-indicator { display: none; }
+
+      a.active { text-decoration: underline; }
     }
   }
 }
