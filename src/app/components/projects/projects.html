@@ -3,6 +3,21 @@
   <div class="grid">
     <div class="card" *ngFor="let p of projects">
 
+      <div class="card-preview">
+        <div class="browser-bar">
+          <span></span><span></span><span></span>
+        </div>
+        <img [src]="p.image" [alt]="'Captura de ' + p.name" loading="lazy" />
+        <div class="overlay">
+          <a class="btn-demo" [href]="p.vercel" target="_blank" rel="noopener">Ver demo ↗</a>
+          <div class="repo-links">
+            <a *ngFor="let r of p.repos" [href]="r.url" target="_blank" rel="noopener">
+              {{ r.label }} ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="card-header">
         <svg *ngIf="p.icon === 'social'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -11,11 +26,6 @@
           <circle cx="18" cy="19" r="3" />
           <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
           <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-        </svg>
-        <svg *ngIf="p.icon === 'med'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7.07-7.07l7 7a5 5 0 0 1-7.07 7.07z" />
-          <line x1="9" y1="9" x2="15" y2="15" />
         </svg>
         <svg *ngIf="p.icon === 'paws'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -48,17 +58,6 @@
 
       <div class="tech-list">
         <span *ngFor="let t of p.tech">{{ t }}</span>
-      </div>
-
-      <div class="repo-links">
-        <span class="repo-label">Repos:</span>
-        <a *ngFor="let r of p.repos" [href]="r.url" target="_blank" rel="noopener">
-          {{ r.label }} ↗
-        </a>
-      </div>
-
-      <div class="actions">
-        <a class="btn-demo" [href]="p.vercel" target="_blank" rel="noopener">Ver demo ↗</a>
       </div>
 
     </div>
