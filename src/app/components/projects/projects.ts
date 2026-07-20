@@ -38,7 +38,7 @@ export class ProjectsComponent {
       ]
     },
     {
-      name: 'Chat WS',
+      name: 'BitBuddy',
       description: 'Chat en tiempo real con WebSockets, autenticación Firebase y modo de conversación con IA.',
       tech: ['Angular', 'TypeScript', 'FastAPI', 'Python', 'Firebase'],
       icon: 'chat',
@@ -51,7 +51,7 @@ export class ProjectsComponent {
     },
     {
       name: 'SavePoint',
-      description: 'Tracker fullstack de biblioteca de videojuegos: horas jugadas, progreso, reseñas y estadísticas.',
+      description: 'Plataforma social para gamers: biblioteca con horas jugadas, progreso, reseñas y estadísticas, perfiles, solicitudes de amistad y chat global y privado.',
       tech: ['Angular', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Firebase'],
       icon: 'controller',
       badge: null,
