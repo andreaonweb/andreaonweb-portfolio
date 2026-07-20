@@ -1,7 +1,12 @@
 <section id="skills">
   <h2>Stack</h2>
-  <div class="skills-grid">
-    <div class="skill-item" *ngFor="let skill of skills">
+  <div class="skills-grid" appScrollReveal appScrollRevealStagger=".skill-item">
+    <div
+      class="skill-item"
+      *ngFor="let skill of skills"
+      (mouseenter)="onHover($event.currentTarget)"
+      (mouseleave)="onLeave($event.currentTarget)"
+    >
       <div class="skill-icon" [innerHTML]="skill.svg"></div>
       <span class="skill-name">{{ skill.name }}</span>
     </div>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { gsap } from 'gsap';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
 interface Skill {
   name: string;
@@ -10,7 +12,7 @@ interface Skill {
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, ScrollRevealDirective],
   templateUrl: './skills.html',
   styleUrl: './skills.scss',
 })
@@ -141,5 +143,17 @@ export class SkillsComponent {
       name: s.name,
       svg: this.sanitizer.bypassSecurityTrustHtml(s.svg)
     }));
+  }
+
+  onHover(target: EventTarget | null) {
+    if (!(target instanceof HTMLElement)) return;
+    const icon = target.querySelector('.skill-icon');
+    if (icon) gsap.to(icon, { y: -4, duration: 0.35, ease: 'back.out(2)' });
+  }
+
+  onLeave(target: EventTarget | null) {
+    if (!(target instanceof HTMLElement)) return;
+    const icon = target.querySelector('.skill-icon');
+    if (icon) gsap.to(icon, { y: 0, duration: 0.3, ease: 'power2.out' });
   }
 }
