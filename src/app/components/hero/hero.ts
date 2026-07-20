@@ -1,5 +1,8 @@
 import { Component, ElementRef, afterNextRender } from '@angular/core';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+const TAGLINE_PHRASES = ['Fullstack Developer', 'Apasionada por la IA', 'UX-driven Dev'];
 
 @Component({
   selector: 'app-hero',
@@ -11,9 +14,11 @@ import { gsap } from 'gsap';
 export class HeroComponent {
   constructor(private el: ElementRef<HTMLElement>) {
     afterNextRender(() => {
+      gsap.registerPlugin(ScrollTrigger);
+
       const root = this.el.nativeElement;
       const entranceTargets = root.querySelectorAll(
-        '.hero-tag, .pre-title, h1, .tagline, .description, .cta'
+        '.hero-tag, .pre-title, h1, .tagline, .description, .cta, .hero-float-card'
       );
 
       gsap.set(entranceTargets, { opacity: 0, y: 20 });
@@ -25,14 +30,33 @@ export class HeroComponent {
         stagger: 0.1,
       });
 
-      root.querySelectorAll<HTMLElement>('.blob').forEach((blob, i) => {
+      const blobs = Array.from(root.querySelectorAll<HTMLElement>('.blob'));
+
+      blobs.forEach((blob, i) => {
         gsap.to(blob, {
-          x: i % 2 === 0 ? 40 : -30,
-          y: i % 2 === 0 ? -25 : 35,
+          xPercent: i % 2 === 0 ? 10 : -8,
+          yPercent: i % 2 === 0 ? -7 : 9,
           duration: 10 + i * 2,
           ease: 'sine.inOut',
           yoyo: true,
           repeat: -1,
+        });
+      });
+
+      const blobParallax = blobs.map((blob, i) => ({
+        moveX: gsap.quickTo(blob, 'x', { duration: 0.6, ease: 'power2.out' }),
+        moveY: gsap.quickTo(blob, 'y', { duration: 0.6, ease: 'power2.out' }),
+        strength: 14 + i * 6,
+      }));
+
+      root.addEventListener('mousemove', (e) => {
+        const rect = root.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+        blobParallax.forEach(({ moveX, moveY, strength }) => {
+          moveX(relX * strength);
+          moveY(relY * strength);
         });
       });
 
@@ -51,6 +75,71 @@ export class HeroComponent {
           moveY(0);
         });
       });
+
+      const taglineEl = root.querySelector<HTMLElement>('.tagline');
+      if (taglineEl) {
+        this.runTypewriter(taglineEl);
+      }
+
+      gsap.to(root.querySelector('.hero-inner'), {
+        opacity: 0,
+        y: -60,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: root,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+
+      gsap.to(blobs, {
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: root,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
     });
+  }
+
+  private runTypewriter(el: HTMLElement): void {
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    const tick = () => {
+      const phrase = TAGLINE_PHRASES[phraseIndex];
+
+      if (!deleting) {
+        charIndex++;
+        el.textContent = phrase.slice(0, charIndex);
+
+        if (charIndex === phrase.length) {
+          setTimeout(() => {
+            deleting = true;
+            tick();
+          }, 1400);
+          return;
+        }
+        setTimeout(tick, 70);
+      } else {
+        charIndex--;
+        el.textContent = phrase.slice(0, charIndex);
+
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % TAGLINE_PHRASES.length;
+          setTimeout(tick, 400);
+          return;
+        }
+        setTimeout(tick, 35);
+      }
+    };
+
+    tick();
   }
 }
