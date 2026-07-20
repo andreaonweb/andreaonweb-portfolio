@@ -16,21 +16,11 @@ export class ProjectsComponent {
       tech: ['React', 'Java', 'Spring Boot', 'PostgreSQL', 'JWT'],
       icon: 'social',
       badge: null,
+      image: 'projects/reverso.png',
       vercel: 'https://reverso-social-web.vercel.app',
       repos: [
         { label: 'Frontend', url: 'https://github.com/andreaonweb/reverso-social-fe' },
         { label: 'Backend', url: 'https://github.com/andreaonweb/reverso-social-be' }
-      ]
-    },
-    {
-      name: 'RecuerdaMed',
-      description: 'App para la gestión de medicación. Semifinalistas en Hackathon Sanitas 2025.',
-      tech: ['React.js', 'Tailwind CSS', 'Vite', 'Axios', 'Vitest'],
-      icon: 'med',
-      badge: '🏆 Hackathon Sanitas 2025',
-      vercel: 'https://recuerdamed-web.vercel.app',
-      repos: [
-        { label: 'Frontend', url: 'https://github.com/andreaonweb/RecuerdaMed-FrontEnd' }
       ]
     },
     {
@@ -39,10 +29,35 @@ export class ProjectsComponent {
       tech: ['React', 'CSS Modules', 'Spring Boot', 'PostgreSQL', 'Axios'],
       icon: 'paws',
       badge: null,
-      vercel: 'https://the-shire-of-paws-fe.vercel.app',
+      image: 'projects/theshireofpaws.png',
+      vercel: 'https://theshireofpaws-frontend.onrender.com',
       repos: [
         { label: 'Frontend', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Frontend' },
         { label: 'Backend', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Backend' }
+      ]
+    },
+    {
+      name: 'Chat WS',
+      description: 'Chat en tiempo real con WebSockets, autenticación Firebase y modo de conversación con IA.',
+      tech: ['Angular', 'TypeScript', 'FastAPI', 'Python', 'Firebase'],
+      icon: 'chat',
+      badge: null,
+      image: 'projects/chat.png',
+      vercel: 'https://chat-frontend-7dwn.onrender.com',
+      repos: [
+        { label: 'Repositorio', url: 'https://github.com/andreaonweb/chat-ws' }
+      ]
+    },
+    {
+      name: 'SavePoint',
+      description: 'Tracker fullstack de biblioteca de videojuegos: horas jugadas, progreso, reseñas y estadísticas.',
+      tech: ['Angular', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Firebase'],
+      icon: 'controller',
+      badge: null,
+      image: 'projects/savepoint.png',
+      vercel: 'https://savepoint-frontend.onrender.com',
+      repos: [
+        { label: 'Repositorio', url: 'https://github.com/SavePoint-App/SavePoint-App' }
       ]
     }
   ];
