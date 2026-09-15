@@ -50,7 +50,7 @@ export class ProjectsComponent {
     },
     {
       name: 'Reverso Social',
-      description: 'Aplicación fullstack de temática sociopolítica con autenticación y gestión de usuarios.',
+      description: 'Sitio institucional para una consultora sociopolítica, con blog, catálogo de servicios y recursos descargables mediante captura de leads. Panel de administración con autenticación para gestionar contenido, servicios, leads y mensajes de contacto.',
       tech: ['React', 'Java', 'Spring Boot', 'PostgreSQL', 'JWT'],
       icon: 'social',
       badge: null,
