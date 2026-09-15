@@ -62,6 +62,19 @@ export class ProjectsComponent {
       ]
     },
     {
+      name: 'CodeCrafters',
+      description: 'Code Happen: plataforma para la gestión de eventos tecnológicos online y presenciales, con landing, listado, creación y detalle de eventos consumiendo una API REST propia. CRUD de eventos, usuarios, asistencias y categorías, con paginación y validaciones.',
+      tech: ['React', 'SCSS', 'Java', 'Spring Boot', 'JWT'],
+      icon: 'calendar',
+      badge: null,
+      image: 'projects/codecrafters.png',
+      vercel: null,
+      repos: [
+        { label: 'Frontend', url: 'https://github.com/andreaonweb/CodeCrafters-Frontend' },
+        { label: 'Backend', url: 'https://github.com/andreaonweb/CodeCrafters-Backend' }
+      ]
+    },
+    {
       name: 'BitBuddy',
       description: 'Chat en tiempo real con WebSockets, autenticación Firebase y modo de conversación con IA.',
       tech: ['Angular', 'TypeScript', 'FastAPI', 'Python', 'Firebase'],
