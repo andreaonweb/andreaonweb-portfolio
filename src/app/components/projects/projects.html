@@ -6,7 +6,7 @@
       <div class="card-preview">
         <img [src]="p.image" [alt]="'Captura de ' + p.name" loading="lazy" />
         <div class="overlay">
-          <a class="btn-demo" [href]="p.vercel" target="_blank" rel="noopener">Ver demo ↗</a>
+          <a class="btn-demo" [href]="p.vercel || p.repos[0].url" target="_blank" rel="noopener">{{ p.vercel ? 'Ver demo ↗' : 'Ver repo ↗' }}</a>
           <div class="repo-links">
             <a *ngFor="let r of p.repos" [href]="r.url" target="_blank" rel="noopener">
               {{ r.label }} ↗
@@ -54,6 +54,11 @@
           <path d="M4 17c1.2-1 2.4 1 3.6 0s2.4-1 3.6 0 2.4 1 3.6 0 2.4-1 3.2 0" />
           <line x1="12" y1="12" x2="12" y2="7" />
           <path d="M12 7c-1 0-1.5-.7-1.5-1.5S11 4 12 3c1 1 1.5 1.7 1.5 2.5S13 7 12 7z" />
+        </svg>
+        <svg *ngIf="p.icon === 'code'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 8 4 12 9 16" />
+          <polyline points="15 8 20 12 15 16" />
         </svg>
         <span class="name">{{ p.name }}</span>
         <span class="badge" *ngIf="p.badge">{{ p.badge }}</span>

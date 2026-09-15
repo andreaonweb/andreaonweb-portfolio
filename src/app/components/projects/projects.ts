@@ -72,6 +72,18 @@ export class ProjectsComponent {
       repos: [
         { label: 'Repositorio', url: 'https://github.com/andreaonweb/Shirayuki_Patisserie' }
       ]
+    },
+    {
+      name: 'Nemblex IT',
+      description: 'Sitio web corporativo para una consultora IT, con presentación de servicios y diseño orientado a captación de clientes.',
+      tech: ['Angular', 'TypeScript', 'SCSS'],
+      icon: 'code',
+      badge: null,
+      image: 'projects/nemblex.jpg',
+      vercel: null,
+      repos: [
+        { label: 'Repositorio', url: 'https://github.com/andreaonweb/nemblex-it' }
+      ]
     }
   ];
 }
