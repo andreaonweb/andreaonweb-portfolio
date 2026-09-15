@@ -185,3 +185,56 @@ section {
   color: var(--color-accent);
   flex-shrink: 0;
 }
+
+.cta-card {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  padding: 40px 28px;
+  min-height: 260px;
+  border: 1px dashed var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.25s, transform 0.25s, background 0.25s;
+
+  .gh-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--color-muted);
+    transition: color 0.25s, transform 0.25s;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  p {
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    max-width: 260px;
+    line-height: 1.5;
+  }
+
+  .gh-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.03em;
+  }
+
+  &:hover {
+    border-color: var(--color-accent-3);
+    border-style: solid;
+    background: var(--color-accent-dim);
+    transform: translateY(-4px);
+
+    .gh-icon {
+      color: var(--color-accent-3);
+      transform: rotate(-8deg) scale(1.08);
+    }
+  }
+}
