@@ -8,7 +8,7 @@
     [class.open]="menuOpen"
     (click)="toggleMenu()"
     [attr.aria-expanded]="menuOpen"
-    aria-label="Abrir menú"
+    [attr.aria-label]="menuOpen ? 'Cerrar menú' : 'Abrir menú'"
   >
     <span></span>
     <span></span>
