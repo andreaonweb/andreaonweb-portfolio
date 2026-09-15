@@ -21,5 +21,8 @@ import { ContactComponent } from './components/contact/contact';
     ContactComponent
   ],
   templateUrl: './app.html',
+  styleUrl: './app.scss',
 })
-export class App { }
+export class App {
+  readonly year = new Date().getFullYear();
+}
