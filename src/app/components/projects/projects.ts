@@ -25,7 +25,7 @@ export class ProjectsComponent {
     },
     {
       name: 'The Shire of Paws',
-      description: 'Explora perros en adopción y gestiona solicitudes de acogida.',
+      description: 'Plataforma de adopción de perros con galería pública filtrable, ficha detallada de cada animal y formulario de solicitud sin necesidad de registro. Incluye panel de administración con autenticación JWT para gestionar los perfiles y aprobar o rechazar las solicitudes de acogida.',
       tech: ['React', 'CSS Modules', 'Spring Boot', 'PostgreSQL', 'Axios'],
       icon: 'paws',
       badge: null,
