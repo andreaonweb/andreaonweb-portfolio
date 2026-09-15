@@ -12,16 +12,15 @@ import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 export class ProjectsComponent {
   projects = [
     {
-      name: 'Reverso Social',
-      description: 'Aplicación fullstack de temática sociopolítica con autenticación y gestión de usuarios.',
-      tech: ['React', 'Java', 'Spring Boot', 'PostgreSQL', 'JWT'],
-      icon: 'social',
+      name: 'Nemblex IT',
+      description: 'Sitio web corporativo para una consultora IT, con presentación de servicios y diseño orientado a captación de clientes.',
+      tech: ['Angular', 'TypeScript', 'SCSS'],
+      icon: 'code',
       badge: null,
-      image: 'projects/reverso.png',
-      vercel: 'https://reverso-social-web.vercel.app',
+      image: 'projects/nemblex.jpg',
+      vercel: null,
       repos: [
-        { label: 'Frontend', url: 'https://github.com/andreaonweb/reverso-social-fe' },
-        { label: 'Backend', url: 'https://github.com/andreaonweb/reverso-social-be' }
+        { label: 'Repositorio', url: 'https://github.com/andreaonweb/nemblex-it' }
       ]
     },
     {
@@ -38,18 +37,6 @@ export class ProjectsComponent {
       ]
     },
     {
-      name: 'BitBuddy',
-      description: 'Chat en tiempo real con WebSockets, autenticación Firebase y modo de conversación con IA.',
-      tech: ['Angular', 'TypeScript', 'FastAPI', 'Python', 'Firebase'],
-      icon: 'chat',
-      badge: null,
-      image: 'projects/chat.png',
-      vercel: 'https://chat-frontend-7dwn.onrender.com',
-      repos: [
-        { label: 'Repositorio', url: 'https://github.com/andreaonweb/chat-ws' }
-      ]
-    },
-    {
       name: 'SavePoint',
       description: 'Plataforma social para gamers: biblioteca con horas jugadas, progreso, reseñas y estadísticas, perfiles, solicitudes de amistad y chat global y privado.',
       tech: ['Angular', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Firebase'],
@@ -62,6 +49,31 @@ export class ProjectsComponent {
       ]
     },
     {
+      name: 'Reverso Social',
+      description: 'Aplicación fullstack de temática sociopolítica con autenticación y gestión de usuarios.',
+      tech: ['React', 'Java', 'Spring Boot', 'PostgreSQL', 'JWT'],
+      icon: 'social',
+      badge: null,
+      image: 'projects/reverso.png',
+      vercel: 'https://reverso-social-web.vercel.app',
+      repos: [
+        { label: 'Frontend', url: 'https://github.com/andreaonweb/reverso-social-fe' },
+        { label: 'Backend', url: 'https://github.com/andreaonweb/reverso-social-be' }
+      ]
+    },
+    {
+      name: 'BitBuddy',
+      description: 'Chat en tiempo real con WebSockets, autenticación Firebase y modo de conversación con IA.',
+      tech: ['Angular', 'TypeScript', 'FastAPI', 'Python', 'Firebase'],
+      icon: 'chat',
+      badge: null,
+      image: 'projects/chat.png',
+      vercel: 'https://chat-frontend-7dwn.onrender.com',
+      repos: [
+        { label: 'Repositorio', url: 'https://github.com/andreaonweb/chat-ws' }
+      ]
+    },
+    {
       name: 'Shirayuki Pâtisserie',
       description: 'E-commerce de repostería japonesa artesanal con carrito reactivo, panel de administración y buses cercanos en tiempo real.',
       tech: ['Angular', 'TypeScript', 'Firebase', 'Firestore', 'SCSS'],
@@ -71,18 +83,6 @@ export class ProjectsComponent {
       vercel: 'https://shirayuki-patisserie.vercel.app',
       repos: [
         { label: 'Repositorio', url: 'https://github.com/andreaonweb/Shirayuki_Patisserie' }
-      ]
-    },
-    {
-      name: 'Nemblex IT',
-      description: 'Sitio web corporativo para una consultora IT, con presentación de servicios y diseño orientado a captación de clientes.',
-      tech: ['Angular', 'TypeScript', 'SCSS'],
-      icon: 'code',
-      badge: null,
-      image: 'projects/nemblex.jpg',
-      vercel: null,
-      repos: [
-        { label: 'Repositorio', url: 'https://github.com/andreaonweb/nemblex-it' }
       ]
     }
   ];

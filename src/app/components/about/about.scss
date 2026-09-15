@@ -13,10 +13,6 @@
     }
   }
 
-  .hobbies {
-    font-size: 1rem;
-    color: var(--color-muted);
-  }
 }
 
 // ── Shared block title ─────────────────────────────────
@@ -30,28 +26,37 @@
   opacity: 0.6;
 }
 
-// ── Stack principal ────────────────────────────────────
-.stack-block {
+// ── Fuera del código ────────────────────────────────────
+.interests-block {
   margin-bottom: 48px;
 
-  .stack-list {
+  .interests-list {
     display: flex;
     flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .interest-item {
+    display: flex;
+    align-items: center;
     gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
 
-    span {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
+    svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
       color: var(--color-accent);
-      background: var(--color-accent-dim);
-      padding: 5px 10px;
-      transition: transform 0.15s, background 0.15s;
+    }
 
-      &:hover {
-        background: var(--color-accent);
-        color: var(--color-bg, #0a0a0a);
-        transform: translateY(-2px);
-      }
+    &:hover {
+      border-color: var(--color-accent);
+      color: var(--color-text);
+      transform: translateY(-2px);
     }
   }
 }
