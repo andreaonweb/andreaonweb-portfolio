@@ -260,6 +260,10 @@ section {
   @media (max-width: 768px) {
     padding-top: 100px;
 
+    .hero-col-right {
+      min-width: 0;
+    }
+
     .description {
       font-size: 0.95rem;
     }
