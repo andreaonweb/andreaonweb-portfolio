@@ -4,6 +4,7 @@
     <div class="card" *ngFor="let p of projects">
 
       <div class="card-preview">
+        <span class="type-tag" [class.collab]="p.type === 'Colaborativo'">{{ p.type }}</span>
         <img [src]="p.image" [alt]="'Captura de ' + p.name" loading="lazy" />
         <div class="overlay">
           <a class="btn-demo" [href]="p.vercel || p.repos[0].url" target="_blank" rel="noopener">{{ p.vercel ? 'Ver demo ↗' : 'Ver repo ↗' }}</a>
