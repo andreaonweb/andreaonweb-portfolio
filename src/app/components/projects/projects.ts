@@ -67,7 +67,7 @@ export class ProjectsComponent {
     },
     {
       name: 'CodeCrafters',
-      description: 'Code Happen: plataforma para la gestión de eventos tecnológicos online y presenciales, con landing, listado, creación y detalle de eventos consumiendo una API REST propia. CRUD de eventos, usuarios, asistencias y categorías, con paginación y validaciones.',
+      description: 'Plataforma para la gestión de eventos tecnológicos online y presenciales, con landing, listado, creación y detalle de eventos consumiendo una API REST propia. CRUD de eventos, usuarios, asistencias y categorías, con paginación y validaciones.',
       tech: ['React', 'SCSS', 'Java', 'Spring Boot', 'JWT'],
       type: 'Colaborativo',
       icon: 'calendar',
