@@ -13,8 +13,8 @@ export class ProjectsComponent {
   projects = [
     {
       name: 'Nemblex IT',
-      description: 'Sitio web corporativo para una consultora IT, con presentación de servicios y diseño orientado a captación de clientes.',
-      tech: ['Angular', 'TypeScript', 'SCSS'],
+      description: 'Sistema de gestión de incidencias IT (helpdesk) con un agente de IA integrado: clasificación automática de tickets, propuestas de resolución vía RAG (Gemini + pgvector) y aprobación humana antes de aplicar cualquier acción sensible.',
+      tech: ['Angular', 'Java', 'Spring Boot', 'PostgreSQL', 'pgvector', 'Gemini'],
       icon: 'code',
       badge: null,
       image: 'projects/nemblex.jpg',
