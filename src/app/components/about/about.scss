@@ -86,33 +86,6 @@
   }
 }
 
-// ── Highlights ─────────────────────────────────────────
-.highlights-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 72px;
-
-  .highlight {
-    font-size: 0.8rem;
-    color: var(--color-muted);
-    border: 1px solid var(--color-border);
-    padding: 8px 14px;
-    transition: border-color 0.2s, color 0.2s;
-
-    &:hover {
-      border-color: var(--color-accent);
-      color: var(--color-text);
-    }
-  }
-
-  @media (max-width: 600px) {
-    .highlight {
-      flex: 1 1 100%;
-    }
-  }
-}
-
 // ── Timeline ───────────────────────────────────────────
 .timeline-title {
   font-family: var(--font-mono);
