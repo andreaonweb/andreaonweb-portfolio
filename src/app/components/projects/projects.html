@@ -11,9 +11,9 @@
 
     <div class="carousel-viewport">
       <div class="carousel-track" appScrollReveal appScrollRevealStagger=".card"
-        [style.transform]="'translateX(-' + (currentPage * 100) + '%)'">
-        <div class="carousel-page" *ngFor="let page of slides">
-          <ng-container *ngFor="let p of page">
+        [style.transform]="'translateX(-' + (currentPage() * 100) + '%)'">
+        <div class="carousel-page" *ngFor="let page of slides; trackBy: trackByPageIndex">
+          <ng-container *ngFor="let p of page; trackBy: trackByProjectName">
 
             <div class="card" *ngIf="p; else ctaTpl">
 
@@ -129,7 +129,7 @@
   </div>
 
   <div class="dots">
-    <button type="button" *ngFor="let page of slides; let i = index" class="dot" [class.active]="i === currentPage"
+    <button type="button" *ngFor="let page of slides; let i = index; trackBy: trackByPageIndex" class="dot" [class.active]="i === currentPage()"
       (click)="goTo(i)" [attr.aria-label]="'Ir a la página ' + (i + 1)"></button>
   </div>
 </section>

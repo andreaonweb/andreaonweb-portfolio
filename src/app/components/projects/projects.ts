@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
@@ -137,18 +137,14 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   private readonly autoplayDelay = 2500;
   private autoplayId?: ReturnType<typeof setInterval>;
 
-  currentPage = 0;
-
-  get slides(): (Project | null)[][] {
-    const items: (Project | null)[] = [...this.projects, null];
-    const pages: (Project | null)[][] = [];
-    for (let i = 0; i < items.length; i += this.pageSize) {
-      pages.push(items.slice(i, i + this.pageSize));
-    }
-    return pages;
-  }
+  currentPage = signal(0);
+  slides: (Project | null)[][] = [];
 
   ngOnInit(): void {
+    const items: (Project | null)[] = [...this.projects, null];
+    for (let i = 0; i < items.length; i += this.pageSize) {
+      this.slides.push(items.slice(i, i + this.pageSize));
+    }
     this.startAutoplay();
   }
 
@@ -170,12 +166,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   next(): void {
     const total = this.slides.length;
-    this.currentPage = (this.currentPage + 1) % total;
+    this.currentPage.update(p => (p + 1) % total);
   }
 
   prev(): void {
     const total = this.slides.length;
-    this.currentPage = (this.currentPage - 1 + total) % total;
+    this.currentPage.update(p => (p - 1 + total) % total);
   }
 
   onNext(): void {
@@ -188,8 +184,16 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.startAutoplay();
   }
 
+  trackByPageIndex(index: number): number {
+    return index;
+  }
+
+  trackByProjectName(index: number, project: Project | null): string {
+    return project ? project.name : 'cta';
+  }
+
   goTo(index: number): void {
-    this.currentPage = index;
+    this.currentPage.set(index);
     this.startAutoplay();
   }
 }
