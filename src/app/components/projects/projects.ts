@@ -1,6 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
+
+interface Project {
+  name: string;
+  description: string;
+  tech: string[];
+  type: string;
+  icon: string;
+  badge: string | null;
+  image: string;
+  vercel: string | null;
+  repos: { label: string; url: string }[];
+}
 
 @Component({
   selector: 'app-projects',
@@ -9,8 +21,8 @@ import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
-export class ProjectsComponent {
-  projects = [
+export class ProjectsComponent implements OnInit, OnDestroy {
+  projects: Project[] = [
     {
       name: 'Nemblex IT',
       description: 'Sistema de gestión de incidencias IT (helpdesk) con un agente de IA integrado: clasificación automática de tickets, propuestas de resolución vía RAG (Gemini + pgvector) y aprobación humana antes de aplicar cualquier acción sensible.',
@@ -22,6 +34,20 @@ export class ProjectsComponent {
       vercel: null,
       repos: [
         { label: 'Repositorio', url: 'https://github.com/andreaonweb/nemblex-it' }
+      ]
+    },
+    {
+      name: 'RecuerdaMed',
+      description: 'Aplicación para la gestión de recordatorios de medicación: pautas de tratamiento, avisos de toma y seguimiento de adherencia. Semifinalistas en el hackathon.',
+      tech: ['Angular', 'TypeScript', 'Java', 'Spring Boot', 'PostgreSQL'],
+      type: 'Colaborativo',
+      icon: 'medical',
+      badge: 'Semifinalistas',
+      image: 'projects/recuerdamed.jpg',
+      vercel: null,
+      repos: [
+        { label: 'Frontend', url: 'https://github.com/andreaonweb/RecuerdaMed-FrontEnd' },
+        { label: 'Backend', url: 'https://github.com/RecuerdaMed/recuerdamed-back' }
       ]
     },
     {
@@ -106,4 +132,64 @@ export class ProjectsComponent {
       ]
     }
   ];
+
+  private readonly pageSize = 3;
+  private readonly autoplayDelay = 2500;
+  private autoplayId?: ReturnType<typeof setInterval>;
+
+  currentPage = 0;
+
+  get slides(): (Project | null)[][] {
+    const items: (Project | null)[] = [...this.projects, null];
+    const pages: (Project | null)[][] = [];
+    for (let i = 0; i < items.length; i += this.pageSize) {
+      pages.push(items.slice(i, i + this.pageSize));
+    }
+    return pages;
+  }
+
+  ngOnInit(): void {
+    this.startAutoplay();
+  }
+
+  ngOnDestroy(): void {
+    this.stopAutoplay();
+  }
+
+  startAutoplay(): void {
+    this.stopAutoplay();
+    this.autoplayId = setInterval(() => this.next(), this.autoplayDelay);
+  }
+
+  stopAutoplay(): void {
+    if (this.autoplayId) {
+      clearInterval(this.autoplayId);
+      this.autoplayId = undefined;
+    }
+  }
+
+  next(): void {
+    const total = this.slides.length;
+    this.currentPage = (this.currentPage + 1) % total;
+  }
+
+  prev(): void {
+    const total = this.slides.length;
+    this.currentPage = (this.currentPage - 1 + total) % total;
+  }
+
+  onNext(): void {
+    this.next();
+    this.startAutoplay();
+  }
+
+  onPrev(): void {
+    this.prev();
+    this.startAutoplay();
+  }
+
+  goTo(index: number): void {
+    this.currentPage = index;
+    this.startAutoplay();
+  }
 }
