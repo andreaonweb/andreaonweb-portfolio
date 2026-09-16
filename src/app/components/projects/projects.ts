@@ -134,7 +134,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   ];
 
   private readonly pageSize = 3;
-  private readonly autoplayDelay = 3500;
+  private readonly autoplayDelay = 5000;
   private autoplayId?: ReturnType<typeof setInterval>;
 
   currentPage = signal(0);
