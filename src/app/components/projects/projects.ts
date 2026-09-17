@@ -120,7 +120,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     },
     {
       name: 'Garden of Thoughts',
-      description: 'Aplicación colaborativa para crear, editar y eliminar frases motivadoras, cada una asociada a un autor y una imagen, construida en equipo siguiendo Atomic Design en Figma.',
+      description: 'Aplicación para crear, editar y eliminar frases motivadoras, cada una con su autor y una imagen asociada, con un diseño de interfaz modular basado en Atomic Design.',
       tech: ['React', 'JavaScript', 'SCSS', 'Vite', 'Vitest'],
       type: 'Colaborativo',
       icon: 'quote',
