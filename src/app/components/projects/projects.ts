@@ -119,16 +119,16 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       ]
     },
     {
-      name: 'Shirayuki Pâtisserie',
-      description: 'E-commerce de repostería japonesa artesanal con carrito reactivo, panel de administración y buses cercanos en tiempo real.',
-      tech: ['Angular', 'TypeScript', 'Firebase', 'Firestore', 'SCSS'],
-      type: 'Personal',
-      icon: 'cake',
+      name: 'Garden of Thoughts',
+      description: 'Aplicación colaborativa para crear, editar y eliminar frases motivadoras, cada una asociada a un autor y una imagen, construida en equipo siguiendo Atomic Design en Figma.',
+      tech: ['React', 'JavaScript', 'SCSS', 'Vite', 'Vitest'],
+      type: 'Colaborativo',
+      icon: 'quote',
       badge: null,
-      image: 'projects/shirayuki.png',
-      vercel: 'https://shirayuki-patisserie.vercel.app',
+      image: 'projects/garden-of-thoughts.jpg',
+      vercel: 'https://garden-of-thoughts-app.vercel.app',
       repos: [
-        { label: 'Repositorio', url: 'https://github.com/andreaonweb/Shirayuki_Patisserie' }
+        { label: 'Repositorio', url: 'https://github.com/andreaonweb/Garden-Of-Thoughts' }
       ]
     }
   ];
