@@ -102,8 +102,8 @@
                 <a class="view-link" [href]="p.vercel || p.repos[0].url" target="_blank" rel="noopener">
                   {{ p.vercel ? 'Ver demo' : 'Ver repo' }} <span aria-hidden="true">&rarr;</span>
                 </a>
-                <div class="repo-links" *ngIf="(p.vercel ? p.repos : p.repos.slice(1)).length">
-                  <a class="repo-link" *ngFor="let r of (p.vercel ? p.repos : p.repos.slice(1))" [href]="r.url" target="_blank" rel="noopener">
+                <div class="repo-links" *ngIf="p.repos.length > 1">
+                  <a class="repo-link" *ngFor="let r of p.repos" [href]="r.url" target="_blank" rel="noopener">
                     {{ r.label }}
                   </a>
                 </div>
