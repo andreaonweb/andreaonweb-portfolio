@@ -2,8 +2,6 @@ import { Component, ElementRef, afterNextRender } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const TAGLINE_PHRASES = ['Fullstack Developer', 'Apasionada por la IA', 'UX-driven Dev'];
-
 @Component({
   selector: 'app-hero',
   standalone: true,
@@ -18,7 +16,7 @@ export class HeroComponent {
 
       const root = this.el.nativeElement;
       const entranceTargets = root.querySelectorAll(
-        '.hero-tag, .pre-title, h1, .tagline, .description, .cta, .hero-float-card, .hero-kanji'
+        '.hero-tag, h1, .role-line, .description, .cta, .hero-float-card, .hero-kanji'
       );
 
       gsap.set(entranceTargets, { opacity: 0, y: 20 });
@@ -76,11 +74,6 @@ export class HeroComponent {
         });
       });
 
-      const taglineEl = root.querySelector<HTMLElement>('.tagline');
-      if (taglineEl) {
-        this.runTypewriter(taglineEl);
-      }
-
       gsap.to(root.querySelector('.hero-inner'), {
         opacity: 0,
         y: -60,
@@ -104,42 +97,5 @@ export class HeroComponent {
         },
       });
     });
-  }
-
-  private runTypewriter(el: HTMLElement): void {
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-
-    const tick = () => {
-      const phrase = TAGLINE_PHRASES[phraseIndex];
-
-      if (!deleting) {
-        charIndex++;
-        el.textContent = phrase.slice(0, charIndex);
-
-        if (charIndex === phrase.length) {
-          setTimeout(() => {
-            deleting = true;
-            tick();
-          }, 1400);
-          return;
-        }
-        setTimeout(tick, 70);
-      } else {
-        charIndex--;
-        el.textContent = phrase.slice(0, charIndex);
-
-        if (charIndex === 0) {
-          deleting = false;
-          phraseIndex = (phraseIndex + 1) % TAGLINE_PHRASES.length;
-          setTimeout(tick, 400);
-          return;
-        }
-        setTimeout(tick, 35);
-      }
-    };
-
-    tick();
   }
 }
