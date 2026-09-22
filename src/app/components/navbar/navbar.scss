@@ -11,10 +11,9 @@ nav {
   border-bottom: 1px solid transparent;
 
   &.scrolled {
-    background: rgba(20, 18, 15, 0.95);
+    background: rgba(20, 18, 15, 0.97);
     border-bottom-color: var(--color-border);
     padding: 14px 40px;
-    backdrop-filter: blur(8px);
   }
 
   .logo {

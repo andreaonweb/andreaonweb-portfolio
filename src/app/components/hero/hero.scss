@@ -45,13 +45,13 @@ section {
     border: 1px solid var(--color-accent-3);
     padding: 18px 20px;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     color: var(--color-text-soft);
     letter-spacing: 0.01em;
     box-shadow: 8px 8px 0 var(--color-accent-3);
 
     .term-head {
-      font-size: 0.68rem;
+      font-size: 0.74rem;
       color: var(--color-muted);
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -169,7 +169,7 @@ section {
 
   h1 {
     font-family: var(--font-display);
-    font-size: clamp(2.8rem, 7.5vw, 5.6rem);
+    font-size: clamp(2.6rem, 6.8vw, 5rem);
     font-weight: 400;
     line-height: 1.02;
     letter-spacing: -0.01em;
@@ -297,7 +297,7 @@ section {
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 860px) {
     padding-top: 100px;
 
     .hero-col-right {
@@ -321,11 +321,11 @@ section {
 
     .hero-float-card {
       transform: none;
-      font-size: 0.72rem;
+      font-size: 0.76rem;
     }
 
     .hero-kanji {
-      display: none;
+      font-size: 2rem;
     }
   }
 }
