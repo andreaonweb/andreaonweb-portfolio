@@ -38,7 +38,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     },
     {
       name: 'RecuerdaMed',
-      description: 'Aplicación para la gestión de recordatorios de medicación: pautas de tratamiento, avisos de toma y seguimiento de adherencia. Semifinalistas en el hackathon.',
+      description: 'Aplicación para la gestión de recordatorios de medicación: pautas de tratamiento, avisos de toma y seguimiento de adherencia. Semifinalistas en el Hackathon Sanitas 2025.',
       tech: ['Angular', 'TypeScript', 'Java', 'Spring Boot', 'PostgreSQL'],
       type: 'Colaborativo',
       icon: 'medical',
