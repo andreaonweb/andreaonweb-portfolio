@@ -18,16 +18,18 @@
   min-width: 0;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
-  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  transition: border-color 0.2s, transform 0.15s, background 0.2s, box-shadow 0.15s;
   cursor: default;
 
   &:hover {
     border-color: var(--color-accent);
     background: var(--color-accent-dim);
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 var(--color-accent);
 
     .skill-icon svg {
       color: var(--color-accent);
-      filter: drop-shadow(0 0 8px var(--color-accent-glow));
+      filter: none;
     }
 
     .skill-name { color: var(--color-accent); }

@@ -1,20 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap');
 
 :root {
-  --color-bg: #08080f;
-  --color-surface: #0f0f1a;
-  --color-surface-2: #14141f;
-  --color-border: #22222f;
-  --color-accent: #a78bfa;
-  --color-accent-2: #60a5fa;
-  --color-accent-3: #e879f9;
-  --color-accent-dim: rgba(167, 139, 250, 0.12);
-  --color-accent-glow: rgba(167, 139, 250, 0.25);
+  --color-bg: #14120f;
+  --color-surface: #221e18;
+  --color-surface-2: #2b251d;
+  --color-border: #3d3527;
+  --color-accent: #e2703a;
+  --color-accent-2: #e8b53c;
+  --color-accent-3: #71c39d;
+  --color-accent-dim: rgba(226, 112, 58, 0.14);
+  --color-accent-glow: rgba(226, 112, 58, 0.3);
   --gradient-primary: linear-gradient(135deg, var(--color-accent-2) 0%, var(--color-accent) 55%, var(--color-accent-3) 100%);
-  --color-text: #f0f0f0;
-  --color-muted: #888888;
+  --color-text: #f4ead7;
+  --color-text-soft: #d9cdb4;
+  --color-muted: #a3937a;
   --font-mono: 'JetBrains Mono', monospace;
   --font-main: 'Space Grotesk', sans-serif;
+  --font-display: 'Archivo Black', 'Space Grotesk', sans-serif;
 }
 
 * {
@@ -30,6 +32,12 @@ html {
 
 body {
   background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 50% 0%, rgba(226, 112, 58, 0.1), transparent 60%),
+    radial-gradient(rgba(244, 234, 215, 0.05) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: auto, 22px 22px, 140px 140px;
+  background-attachment: fixed, fixed, fixed;
   color: var(--color-text);
   font-family: var(--font-main);
   font-size: 16px;
@@ -44,14 +52,24 @@ section {
 }
 
 h2 {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-mono);
-  font-size: 1.6rem;
-  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  padding: 10px 18px;
   margin-bottom: 3rem;
 
   &::before {
     content: '> ';
-    opacity: 0.85;
+    color: var(--color-accent);
+    opacity: 1;
   }
 }
 
