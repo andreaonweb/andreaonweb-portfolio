@@ -1,14 +1,15 @@
 <section id="skills">
   <h2>Stack</h2>
-  <div class="skills-grid" appScrollReveal appScrollRevealStagger=".skill-item">
-    <div
-      class="skill-item"
-      *ngFor="let skill of skills"
-      (mouseenter)="onHover($event.currentTarget)"
-      (mouseleave)="onLeave($event.currentTarget)"
-    >
-      <div class="skill-icon" [innerHTML]="skill.svg"></div>
-      <span class="skill-name">{{ skill.name }}</span>
+  <div class="skills-grid" appScrollReveal appScrollRevealStagger=".skill-card">
+    <div class="skill-card" *ngFor="let group of groups">
+      <div class="skill-card-head">
+        <span class="skill-card-title">{{ group.title }}</span>
+        <span class="skill-card-kanji" aria-hidden="true">{{ group.kanji }}</span>
+      </div>
+      <div class="skill-card-rule" aria-hidden="true"></div>
+      <ul class="skill-card-list">
+        <li *ngFor="let s of group.skills"><span class="mark" aria-hidden="true">&times;</span> {{ s }}</li>
+      </ul>
     </div>
   </div>
 </section>

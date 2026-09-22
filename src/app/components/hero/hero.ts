@@ -18,7 +18,7 @@ export class HeroComponent {
 
       const root = this.el.nativeElement;
       const entranceTargets = root.querySelectorAll(
-        '.hero-tag, .pre-title, h1, .tagline, .description, .cta, .hero-float-card'
+        '.hero-tag, .pre-title, h1, .tagline, .description, .cta, .hero-float-card, .hero-kanji'
       );
 
       gsap.set(entranceTargets, { opacity: 0, y: 20 });

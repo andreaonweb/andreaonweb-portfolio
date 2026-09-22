@@ -1,62 +1,62 @@
-.intro {
-  color: var(--color-text-soft);
-  margin-bottom: 48px;
-  font-size: 1.2rem;
+.contact-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 0.98;
+  color: var(--color-text);
+  margin-bottom: 28px;
 }
 
-.links {
+.intro {
+  color: var(--color-text-soft);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+
+.email-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 4px;
+  margin-bottom: 40px;
+  word-break: break-all;
+  transition: color 0.2s, border-color 0.2s;
+
+  &:hover {
+    color: var(--color-accent-2);
+    border-color: var(--color-accent-2);
+    text-decoration: none;
+  }
+}
+
+.chip-links {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 14px;
 
   a {
-    display: flex;
-    gap: 24px;
-    align-items: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
     color: var(--color-text);
-    font-size: 1rem;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--color-border);
-    transition: background 0.2s, color 0.2s;
-    flex-wrap: wrap;
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    .label {
-      font-family: var(--font-mono);
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      min-width: 72px;
-      font-size: 0.82rem;
-      flex-shrink: 0;
-      letter-spacing: 0.05em;
-    }
-
-    span:last-child {
-      word-break: break-all;
-      color: var(--color-muted);
-      transition: color 0.2s;
-    }
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 12px 22px;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s, color 0.15s;
 
     &:hover {
-      background: var(--color-accent-dim);
+      color: var(--color-accent);
+      border-color: var(--color-accent);
       text-decoration: none;
-
-      span:last-child {
-        color: var(--color-text);
-      }
-    }
-
-    @media (max-width: 480px) {
-      font-size: 0.88rem;
-      padding: 16px 20px;
-      gap: 12px;
+      transform: translate(-2px, -2px);
+      box-shadow: 3px 3px 0 var(--color-accent);
     }
   }
 }

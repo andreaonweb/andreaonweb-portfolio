@@ -28,48 +28,74 @@ section {
   }
 
   .hero-col-left {
-    flex: 0 1 auto;
+    flex: 1 1 420px;
     min-width: 0;
     position: relative;
   }
 
+  .hero-col-right {
+    flex: 0 1 340px;
+    min-width: 280px;
+    position: relative;
+  }
+
   .hero-float-card {
-    position: absolute;
-    top: -6px;
-    right: -36px;
     background: var(--color-surface);
     border: 1px solid var(--color-accent-3);
-    padding: 10px 16px;
+    padding: 18px 20px;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--color-muted);
-    letter-spacing: 0.02em;
-    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
-    transform: rotate(-3deg);
-    white-space: nowrap;
+    font-size: 0.78rem;
+    color: var(--color-text-soft);
+    letter-spacing: 0.01em;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+    transform: rotate(-1.5deg);
+
+    .term-head {
+      font-size: 0.68rem;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
 
     .line {
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       & + .line {
-        margin-top: 4px;
+        margin-top: 7px;
       }
     }
 
     .prompt {
       color: var(--color-accent);
+      flex-shrink: 0;
     }
 
-    .ok .check {
+    .ok {
       color: var(--color-accent-3);
+    }
+
+    .blink {
+      color: var(--color-accent);
+      animation: blink 1s step-end infinite;
     }
   }
 
-  .hero-col-right {
-    flex: 1 1 320px;
-    min-width: 280px;
+  .hero-kanji {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--color-accent-3);
+    opacity: 0.5;
+    margin-top: 24px;
+    text-align: right;
   }
 
   .blob {
@@ -295,7 +321,15 @@ section {
     }
 
     .hero-scroll { display: none; }
-    .hero-float-card { display: none; }
+
+    .hero-float-card {
+      transform: none;
+      font-size: 0.72rem;
+    }
+
+    .hero-kanji {
+      display: none;
+    }
   }
 }
 

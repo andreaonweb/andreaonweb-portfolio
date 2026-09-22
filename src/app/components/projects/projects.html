@@ -20,14 +20,6 @@
               <div class="card-preview">
                 <span class="type-tag" [class.collab]="p.type === 'Colaborativo'">{{ p.type }}</span>
                 <img [src]="p.image" [alt]="'Captura de ' + p.name" loading="lazy" />
-                <div class="overlay">
-                  <a class="btn-demo" [href]="p.vercel || p.repos[0].url" target="_blank" rel="noopener">{{ p.vercel ? 'Ver demo ↗' : 'Ver repo ↗' }}</a>
-                  <div class="repo-links">
-                    <a *ngFor="let r of p.repos" [href]="r.url" target="_blank" rel="noopener">
-                      {{ r.label }} ↗
-                    </a>
-                  </div>
-                </div>
               </div>
 
               <div class="card-header">
@@ -105,6 +97,10 @@
               <div class="tech-list">
                 <span *ngFor="let t of p.tech">{{ t }}</span>
               </div>
+
+              <a class="view-link" [href]="p.vercel || p.repos[0].url" target="_blank" rel="noopener">
+                {{ p.vercel ? 'Ver demo' : 'Ver repo' }} <span aria-hidden="true">&rarr;</span>
+              </a>
 
             </div>
 
