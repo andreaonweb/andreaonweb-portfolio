@@ -46,8 +46,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       image: 'projects/recuerdamed.jpg',
       vercel: null,
       repos: [
-        { label: 'Frontend', url: 'https://github.com/andreaonweb/RecuerdaMed-FrontEnd' },
-        { label: 'Backend', url: 'https://github.com/RecuerdaMed/recuerdamed-back' }
+        { label: 'Repo front', url: 'https://github.com/andreaonweb/RecuerdaMed-FrontEnd' },
+        { label: 'Repo back', url: 'https://github.com/RecuerdaMed/recuerdamed-back' }
       ]
     },
     {
@@ -60,8 +60,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       image: 'projects/theshireofpaws.png',
       vercel: null,
       repos: [
-        { label: 'Frontend', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Frontend' },
-        { label: 'Backend', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Backend' }
+        { label: 'Repo front', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Frontend' },
+        { label: 'Repo back', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Backend' }
       ]
     },
     {
@@ -87,8 +87,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       image: 'projects/reverso.png',
       vercel: 'https://reverso-social-web.vercel.app',
       repos: [
-        { label: 'Frontend', url: 'https://github.com/andreaonweb/reverso-social-fe' },
-        { label: 'Backend', url: 'https://github.com/andreaonweb/reverso-social-be' }
+        { label: 'Repo front', url: 'https://github.com/andreaonweb/reverso-social-fe' },
+        { label: 'Repo back', url: 'https://github.com/andreaonweb/reverso-social-be' }
       ]
     },
     {
@@ -101,8 +101,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       image: 'projects/codecrafters.png',
       vercel: null,
       repos: [
-        { label: 'Frontend', url: 'https://github.com/andreaonweb/CodeCrafters-Frontend' },
-        { label: 'Backend', url: 'https://github.com/andreaonweb/CodeCrafters-Backend' }
+        { label: 'Repo front', url: 'https://github.com/andreaonweb/CodeCrafters-Frontend' },
+        { label: 'Repo back', url: 'https://github.com/andreaonweb/CodeCrafters-Backend' }
       ]
     },
     {
