@@ -186,12 +186,12 @@ section {
     }
 
     .name-accent {
-      color: var(--color-name-accent);
+      color: var(--color-accent);
       text-shadow: 3px 3px 0 var(--color-accent-3);
     }
 
     .cursor {
-      color: var(--color-name-accent);
+      color: var(--color-accent);
       text-shadow: none;
       animation: blink 1s step-end infinite;
     }
