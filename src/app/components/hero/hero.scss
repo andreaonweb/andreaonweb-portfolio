@@ -104,11 +104,12 @@ section {
     opacity: 0.25;
   }
 
-  .name-gradient {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .name-white {
+    color: #fff;
+  }
+
+  .name-accent {
+    color: var(--color-accent);
   }
 
   min-height: 100vh;
