@@ -16,7 +16,7 @@ export class HeroComponent {
 
       const root = this.el.nativeElement;
       const entranceTargets = root.querySelectorAll(
-        '.hero-tag, h1, .role-line, .description, .cta, .hero-float-card, .hero-kanji'
+        '.hero-tag, h1, .role-line, .description, .cta, .hero-float-card'
       );
 
       gsap.set(entranceTargets, { opacity: 0, y: 20 });
@@ -27,6 +27,10 @@ export class HeroComponent {
         ease: 'power2.out',
         stagger: 0.1,
       });
+
+      const kanjiEl = root.querySelector('.hero-kanji');
+      gsap.set(kanjiEl, { opacity: 0 });
+      gsap.to(kanjiEl, { opacity: 0.95, duration: 0.7, delay: 0.5, ease: 'power2.out' });
 
       const blobs = Array.from(root.querySelectorAll<HTMLElement>('.blob'));
 

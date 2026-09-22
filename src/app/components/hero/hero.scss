@@ -37,6 +37,7 @@ section {
     flex: 0 1 340px;
     min-width: 280px;
     position: relative;
+    padding-bottom: 50px;
   }
 
   .hero-float-card {
@@ -47,8 +48,7 @@ section {
     font-size: 0.78rem;
     color: var(--color-text-soft);
     letter-spacing: 0.01em;
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
-    transform: rotate(-1.5deg);
+    box-shadow: 8px 8px 0 var(--color-accent-3);
 
     .term-head {
       font-size: 0.68rem;
@@ -89,13 +89,16 @@ section {
   }
 
   .hero-kanji {
+    position: absolute;
+    left: 0;
+    bottom: 0;
     font-family: var(--font-display);
+    font-weight: 700;
     font-size: 2.6rem;
     line-height: 1;
     color: var(--color-accent-3);
-    opacity: 0.5;
-    margin-top: 24px;
-    text-align: right;
+    opacity: 0.95;
+    animation: kanji-float 4s ease-in-out infinite;
   }
 
   .blob {
@@ -173,7 +176,8 @@ section {
     text-transform: uppercase;
     margin-bottom: 20px;
 
-    span {
+    .line-1,
+    .line-2 {
       display: block;
     }
 
@@ -181,7 +185,11 @@ section {
       color: var(--color-text);
     }
 
-    .line-2 {
+    .name-white {
+      color: var(--color-text);
+    }
+
+    .name-accent {
       color: var(--color-accent);
       text-shadow: 3px 3px 0 var(--color-accent-3);
     }
@@ -339,4 +347,9 @@ section {
 @keyframes scanline {
   0%   { left: -100%; }
   100% { left: 100%; }
+}
+
+@keyframes kanji-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
 }
