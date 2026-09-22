@@ -106,6 +106,19 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       ]
     },
     {
+      name: 'KO Patisserie',
+      description: 'Web de una pastelería japonesa-francesa con carta, pedidos con recogida en tienda, chat de ayuda en tiempo real y panel de administración para gestionar pedidos y contenido.',
+      tech: ['Angular', 'TypeScript', 'FastAPI', 'PostgreSQL', 'WebSocket'],
+      type: 'Personal',
+      icon: 'cake',
+      badge: null,
+      image: 'projects/ko-patisserie.jpg',
+      vercel: 'https://ko-patisserie-front.onrender.com',
+      repos: [
+        { label: 'Repositorio', url: 'https://github.com/andreaonweb/KO_Patisserie' }
+      ]
+    },
+    {
       name: 'BitBuddy',
       description: 'Chat en tiempo real con WebSockets, autenticación Firebase y modo de conversación con IA.',
       tech: ['Angular', 'TypeScript', 'FastAPI', 'Python', 'Firebase'],
