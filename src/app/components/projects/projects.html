@@ -98,9 +98,21 @@
                 <span *ngFor="let t of p.tech">{{ t }}</span>
               </div>
 
-              <a class="view-link" [href]="p.vercel || p.repos[0].url" target="_blank" rel="noopener">
-                {{ p.vercel ? 'Ver demo' : 'Ver repo' }} <span aria-hidden="true">&rarr;</span>
-              </a>
+              <div class="view-links">
+                <a class="view-link" *ngIf="p.vercel" [href]="p.vercel" target="_blank" rel="noopener">
+                  Ver demo <span aria-hidden="true">&rarr;</span>
+                </a>
+                <ng-container *ngIf="p.repos.length > 1; else singleRepoTpl">
+                  <a class="view-link" *ngFor="let r of p.repos" [href]="r.url" target="_blank" rel="noopener">
+                    {{ r.label }} <span aria-hidden="true">&rarr;</span>
+                  </a>
+                </ng-container>
+                <ng-template #singleRepoTpl>
+                  <a class="view-link" *ngIf="!p.vercel" [href]="p.repos[0].url" target="_blank" rel="noopener">
+                    Ver repo <span aria-hidden="true">&rarr;</span>
+                  </a>
+                </ng-template>
+              </div>
 
             </div>
 

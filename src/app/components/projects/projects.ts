@@ -58,7 +58,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       icon: 'paws',
       badge: null,
       image: 'projects/theshireofpaws.png',
-      vercel: 'https://theshireofpaws-frontend.onrender.com',
+      vercel: null,
       repos: [
         { label: 'Frontend', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Frontend' },
         { label: 'Backend', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Backend' }
