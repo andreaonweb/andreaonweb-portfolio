@@ -94,8 +94,11 @@
 
   .place {
     display: block;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-family: var(--font-retro);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-weight: 600;
+    font-size: 1.05rem;
     color: var(--color-accent);
     margin: 2px 0 10px;
   }

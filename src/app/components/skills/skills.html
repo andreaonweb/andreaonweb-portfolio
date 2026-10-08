@@ -19,7 +19,6 @@
   <div class="panel" id="panel-skills" role="tabpanel" [attr.aria-labelledby]="'tab-' + active()"
     [style.--tone]="groups[active()].tone">
     <span class="panel-kanji" aria-hidden="true">{{ groups[active()].kanji }}</span>
-    <p class="panel-meaning" aria-hidden="true">{{ groups[active()].meaning }}</p>
     <ul class="pills">
       @for (s of groups[active()].skills; track s; let j = $index) {
         <li class="pill" [style.--rot]="rotations[j % rotations.length]">{{ s }}</li>

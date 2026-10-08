@@ -6,7 +6,6 @@ import { reducedMotion } from '../../shared/motion';
 interface SkillGroup {
   title: string;
   kanji: string;
-  meaning: string;
   tone: string;
   skills: string[];
 }
@@ -26,21 +25,18 @@ export class SkillsComponent {
     {
       title: 'Frontend',
       kanji: '木',
-      meaning: 'madera · lo que crece y se ve',
       tone: 'var(--color-accent-3)',
       skills: ['JavaScript', 'TypeScript', 'React', 'Angular'],
     },
     {
       title: 'Backend',
       kanji: '水',
-      meaning: 'agua · lo que fluye por debajo',
       tone: 'var(--color-accent)',
       skills: ['Java', 'Spring Boot', 'Python', 'PostgreSQL', 'REST APIs', 'JWT'],
     },
     {
       title: 'Herramientas',
       kanji: '火',
-      meaning: 'fuego · lo que lo pone en marcha',
       tone: 'var(--color-accent-4)',
       skills: ['Git', 'Figma', 'Scrum', 'TDD'],
     },
