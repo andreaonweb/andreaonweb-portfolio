@@ -9,7 +9,6 @@ import { SkillsComponent } from './components/skills/skills';
 import { ProjectsComponent } from './components/projects/projects';
 import { JourneyComponent } from './components/journey/journey';
 import { ContactComponent } from './components/contact/contact';
-import { finePointer, reducedMotion } from './shared/motion';
 
 @Component({
   selector: 'app-root',
@@ -44,35 +43,6 @@ export class App {
       // Fuentes e imágenes cambian la altura de la página
       window.addEventListener('load', () => ScrollTrigger.refresh());
       document.fonts?.ready.then(() => ScrollTrigger.refresh());
-
-      this.initCursor();
     });
-  }
-
-  private initCursor(): void {
-    if (!finePointer() || reducedMotion()) return;
-    document.body.classList.add('has-cursor');
-
-    const dot = document.querySelector<HTMLElement>('.cursor-dot')!;
-    const ring = document.querySelector<HTMLElement>('.cursor-ring')!;
-    const dotX = gsap.quickTo(dot, 'x', { duration: 0.1 });
-    const dotY = gsap.quickTo(dot, 'y', { duration: 0.1 });
-    const ringX = gsap.quickTo(ring, 'x', { duration: 0.45, ease: 'power3' });
-    const ringY = gsap.quickTo(ring, 'y', { duration: 0.45, ease: 'power3' });
-
-    window.addEventListener('pointermove', (e) => {
-      dotX(e.clientX);
-      dotY(e.clientY);
-      ringX(e.clientX);
-      ringY(e.clientY);
-    });
-
-    document.addEventListener('pointerover', (e) => {
-      const interactive = (e.target as HTMLElement).closest('a, button, [role="tab"]');
-      document.body.classList.toggle('cursor-hover', !!interactive);
-    });
-
-    document.documentElement.addEventListener('pointerleave', () => document.body.classList.add('cursor-out'));
-    document.documentElement.addEventListener('pointerenter', () => document.body.classList.remove('cursor-out'));
   }
 }

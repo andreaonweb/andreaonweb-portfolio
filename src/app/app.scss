@@ -10,55 +10,6 @@
   transform-origin: left;
 }
 
-// ── Custom cursor ───────────────────────────────────────
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 300;
-  pointer-events: none;
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.3s, width 0.3s var(--ease-out), height 0.3s var(--ease-out), margin 0.3s var(--ease-out),
-    background-color 0.3s;
-}
-
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  background: var(--color-accent-2);
-}
-
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  margin: -18px 0 0 -18px;
-  border: 1.5px solid var(--color-accent);
-}
-
-:host-context(body.has-cursor) {
-  .cursor-dot,
-  .cursor-ring {
-    opacity: 1;
-  }
-}
-
-:host-context(body.cursor-hover) .cursor-ring {
-  width: 64px;
-  height: 64px;
-  margin: -32px 0 0 -32px;
-  background-color: rgba(169, 125, 194, 0.15);
-}
-
-:host-context(body.cursor-out) {
-  .cursor-dot,
-  .cursor-ring {
-    opacity: 0;
-  }
-}
-
 // ── Ribbons ─────────────────────────────────────────────
 .ribbons {
   position: relative;

@@ -98,7 +98,6 @@
   rotate: var(--rot);
   box-shadow: 4px 4px 0 var(--tone);
   transition: rotate 0.4s var(--ease-out), box-shadow 0.3s, background 0.3s;
-  cursor: default;
 
   &:hover {
     rotate: 0deg;
