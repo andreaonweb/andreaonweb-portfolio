@@ -40,7 +40,7 @@ export class JourneyComponent {
       highlight: false,
     },
     {
-      date: '2017',
+      date: '2017 — 2019',
       title: 'Laboratorio de imagen',
       place: 'Formación profesional de grado medio',
       text: 'Formación técnica especializada en imagen, iluminación y captación visual.',
