@@ -102,30 +102,44 @@
 // ── Footer ──────────────────────────────────────────────
 .site-footer {
   border-top: 1px solid var(--color-border);
-  padding: 64px 24px 28px;
+  padding: 56px 24px 28px;
   text-align: center;
   overflow: hidden;
 }
 
-.footer-word {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 19vw, 15rem);
-  line-height: 0.9;
-  color: transparent;
-  -webkit-text-stroke: 1.5px #5c503d;
-  transition: -webkit-text-stroke-color 0.4s;
+.to-top {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  transition: color 0.3s;
 
-  em {
-    font-style: normal;
-    transition: color 0.4s;
+  .to-top-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    font-family: var(--font-main);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.4s var(--ease-out);
   }
 
   &:hover {
-    -webkit-text-stroke-color: var(--color-accent);
+    color: var(--color-accent-2);
 
-    em {
-      color: var(--color-accent);
+    .to-top-icon {
+      background: var(--color-accent-2);
+      border-color: var(--color-accent-2);
+      color: var(--color-ink);
+      transform: translateY(-6px);
     }
   }
 }
@@ -141,14 +155,6 @@
   font-size: 0.78rem;
   color: var(--color-muted);
   letter-spacing: 0.02em;
-
-  .to-top {
-    color: var(--color-text-soft);
-
-    &:hover {
-      color: var(--color-accent-2);
-    }
-  }
 
   @media (max-width: 700px) {
     flex-direction: column;

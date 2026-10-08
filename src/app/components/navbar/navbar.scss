@@ -46,29 +46,12 @@ nav {
   font-family: var(--font-display);
   font-size: 1.05rem;
 
-  .logo-mark {
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: var(--color-accent-2);
-    color: var(--color-ink);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.4rem;
-    line-height: 1;
-    transition: transform 0.5s var(--ease-out);
-  }
 
   em {
     font-style: normal;
     color: var(--color-accent);
   }
 
-  &:hover .logo-mark {
-    transform: rotate(-20deg) scale(1.08);
-  }
 }
 
 .links {
@@ -93,13 +76,13 @@ nav {
       display: none;
     }
 
-    &:hover,
-    &.active {
+    &:hover {
       color: var(--color-text);
     }
 
     &.active {
       color: var(--color-ink);
+      font-weight: 700;
     }
   }
 }
@@ -111,7 +94,7 @@ nav {
   height: 100%;
   width: 0;
   border-radius: 999px;
-  background: var(--color-text);
+  background: var(--color-accent-2);
   opacity: 0;
   pointer-events: none;
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap');
 
 :root {
   --color-bg: #14120f;
@@ -20,7 +20,6 @@
   --font-mono: 'JetBrains Mono', monospace;
   --font-main: 'Space Grotesk', sans-serif;
   --font-display: 'Archivo Black', 'Space Grotesk', sans-serif;
-  --font-serif: 'Instrument Serif', Georgia, serif;
   --radius: 20px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -104,11 +103,8 @@ section {
     color: var(--color-text);
 
     em {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-weight: 400;
+      font-style: normal;
       color: var(--color-accent);
-      letter-spacing: 0;
     }
   }
 

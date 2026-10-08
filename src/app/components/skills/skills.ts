@@ -47,13 +47,6 @@ export class SkillsComponent {
   ];
 
   readonly rotations = ['-4deg', '3deg', '-2deg', '5deg', '-5deg', '2deg'];
-  // Duplicadas para que cada pista de la marquesina cubra pantallas anchas
-  private readonly front = ['Angular', 'React', 'TypeScript', 'JavaScript', 'SCSS', 'Vite', 'Vitest', 'GSAP', 'Figma'];
-  private readonly back = ['Java', 'Spring Boot', 'Python', 'FastAPI', 'PostgreSQL', 'pgvector', 'Firebase', 'WebSocket', 'Gemini'];
-
-  readonly row1 = [...this.front, ...this.front];
-  readonly row2 = [...this.back, ...this.back];
-
   readonly active = signal(0);
 
   select(i: number): void {
