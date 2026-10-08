@@ -43,7 +43,7 @@ export class JourneyComponent {
       date: '2017 — 2019',
       title: 'CFGM Laboratorio de imagen',
       place: 'Formación profesional de grado medio',
-      text: 'Formación técnica especializada en imagen, iluminación y captación visual.',
+      text: 'Formación especializada en imagen, iluminación y captación visual.',
       emoji: '◎',
       highlight: false,
     },
