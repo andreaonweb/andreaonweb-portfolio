@@ -32,7 +32,7 @@ export class SkillsComponent {
       title: 'Backend',
       kanji: '水',
       tone: 'var(--color-accent)',
-      skills: ['Java', 'Spring Boot', 'Python', 'PostgreSQL', 'REST APIs', 'JWT'],
+      skills: ['Java', 'Spring Boot', 'Python', 'PostgreSQL', 'Firebase', 'REST APIs', 'JWT'],
     },
     {
       title: 'Herramientas',
