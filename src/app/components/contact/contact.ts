@@ -45,7 +45,7 @@ export class ContactComponent {
         },
       });
 
-      gsap.from(root.querySelectorAll('.eyebrow-pill, .contact-heading, .intro, .email-row, .socials'), {
+      gsap.from(root.querySelectorAll('.contact-heading, .intro, .email-row, .socials'), {
         opacity: 0,
         y: 40,
         duration: 0.8,

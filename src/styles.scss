@@ -72,27 +72,6 @@ section {
   align-items: center;
   margin-bottom: 64px;
 
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-accent-2);
-    margin-bottom: 14px;
-
-    &::before,
-    &::after {
-      content: '';
-      width: 28px;
-      height: 1px;
-      background: currentColor;
-    }
-  }
-
   h2 {
     position: relative;
     z-index: 1;

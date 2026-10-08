@@ -40,32 +40,6 @@
   pointer-events: none;
 }
 
-.eyebrow-pill {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 16px;
-  border-radius: 999px;
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 26px;
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #3fae7a;
-    animation: pulse 2s ease-in-out infinite;
-  }
-}
-
 .contact-heading {
   position: relative;
   z-index: 2;

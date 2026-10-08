@@ -33,32 +33,6 @@ section {
   align-items: center;
 }
 
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: rgba(34, 30, 24, 0.7);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-text-soft);
-  margin-bottom: 28px;
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-accent-3);
-    box-shadow: 0 0 12px var(--color-accent-3);
-    animation: pulse 2s ease-in-out infinite;
-  }
-}
-
 
 h1 {
   display: flex;

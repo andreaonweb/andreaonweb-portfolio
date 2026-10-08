@@ -2,11 +2,6 @@
   <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="hero-inner">
-    <div class="hero-tag">
-      <span class="dot"></span>
-      <span>Disponible para trabajar</span>
-    </div>
-
     <h1 aria-label="aonweb">
       @for (c of nameChars; track $index) {
         <span class="char-mask" aria-hidden="true"><span class="char" [class.accent]="$index >= 3">{{ c }}</span></span>

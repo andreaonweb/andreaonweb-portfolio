@@ -66,7 +66,6 @@ export class HeroComponent {
       stagger: 0.06,
       clearProps: 'transform',
     })
-      .from(root.querySelectorAll('.hero-tag'), { opacity: 0, y: 16, duration: 0.6, stagger: 0.1 }, 0.1)
       .from(
         root.querySelectorAll('.rotator, .description, .cta, .badge, .scroll-cue'),
         { opacity: 0, y: 24, duration: 0.7, stagger: 0.1 },
