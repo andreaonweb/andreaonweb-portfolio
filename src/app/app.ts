@@ -9,6 +9,7 @@ import { SkillsComponent } from './components/skills/skills';
 import { ProjectsComponent } from './components/projects/projects';
 import { JourneyComponent } from './components/journey/journey';
 import { ContactComponent } from './components/contact/contact';
+import { PixelWalkerComponent } from './components/pixel-walker/pixel-walker';
 
 @Component({
   selector: 'app-root',
@@ -21,15 +22,13 @@ import { ContactComponent } from './components/contact/contact';
     ProjectsComponent,
     JourneyComponent,
     ContactComponent,
+    PixelWalkerComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
   readonly year = new Date().getFullYear();
-  readonly ribbonWords = ['Fullstack', 'UX/UI', 'IA aplicada', 'Angular', 'React', 'Spring Boot', 'Python'];
-  readonly ribbonWords2 = ['Disponible', 'Clean code', 'Accesible', 'Hecho con cariño', 'Remoto · CET'];
-
   constructor() {
     afterNextRender(() => {
       gsap.registerPlugin(ScrollTrigger);

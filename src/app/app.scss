@@ -10,46 +10,6 @@
   transform-origin: left;
 }
 
-// ── Ribbons ─────────────────────────────────────────────
-.ribbons {
-  position: relative;
-  height: 190px;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-}
-
-.ribbon {
-  position: absolute;
-  width: 120%;
-  padding: 14px 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--color-ink);
-
-  .star {
-    font-family: var(--font-main);
-  }
-}
-
-.ribbon-a {
-  background: var(--color-accent-2);
-  transform: rotate(-3deg);
-  z-index: 1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-.ribbon-b {
-  background: var(--color-accent);
-  transform: rotate(2.5deg);
-
-  .marquee-track {
-    animation-duration: 36s;
-  }
-}
-
 // ── Footer ──────────────────────────────────────────────
 .site-footer {
   border-top: 1px solid var(--color-border);

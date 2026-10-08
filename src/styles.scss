@@ -114,37 +114,6 @@ section {
   }
 }
 
-// ── Marquee (shared) ────────────────────────────────────
-.marquee {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-
-  .marquee-track {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 32px;
-    padding-right: 32px;
-    min-width: 100%;
-    animation: marquee 28s linear infinite;
-  }
-
-  &.reverse .marquee-track {
-    animation-direction: reverse;
-  }
-
-  &:hover .marquee-track {
-    animation-play-state: paused;
-  }
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-100%);
-  }
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);

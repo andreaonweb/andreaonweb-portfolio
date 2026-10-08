@@ -1,4 +1,4 @@
-import { Component, ElementRef, afterNextRender, inject, signal } from '@angular/core';
+import { Component, ElementRef, afterNextRender, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,18 +19,14 @@ export class AboutComponent {
   private sanitizer = inject(DomSanitizer);
   private el = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  readonly flipped = signal(new Set<number>());
-
   readonly interests = [
     {
       label: 'Metalcore / Deathcore',
-      back: 'La banda sonora de cada sesión de código.',
       tone: 'var(--color-accent)',
       icon: svg('<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3v-7a9 9 0 0 1 18 0v7h-3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>'),
     },
     {
       label: 'Videojuegos',
-      back: 'De aquí salió la idea de SavePoint.',
       tone: 'var(--color-accent-2)',
       icon: svg(
         '<path d="M7 8h10a4 4 0 0 1 4 4.5l-.6 3a2.4 2.4 0 0 1-4.2 1.1L15 15H9l-1.2 1.6a2.4 2.4 0 0 1-4.2-1.1l-.6-3A4 4 0 0 1 7 8z"/><line x1="7.5" y1="11" x2="7.5" y2="14"/><line x1="6" y1="12.5" x2="9" y2="12.5"/>'
@@ -38,19 +34,16 @@ export class AboutComponent {
     },
     {
       label: 'Senderismo',
-      back: 'Desconectar del código para volver con ideas nuevas.',
       tone: 'var(--color-accent-3)',
       icon: svg('<path d="m8 3 4 8 5-5 5 15H2L8 3z"/>'),
     },
     {
       label: 'Fotografía de naturaleza',
-      back: 'Mi pasado audiovisual sigue muy presente.',
       tone: 'var(--color-accent-4)',
       icon: svg('<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>'),
     },
     {
       label: 'Anime y manga',
-      back: 'De aquí salen los kanji que ves por la web.',
       tone: 'var(--color-paper)',
       icon: svg(
         '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>'
@@ -124,14 +117,6 @@ export class AboutComponent {
         ease: 'none',
         scrollTrigger: { trigger: stage, scrub: true },
       });
-    });
-  }
-
-  toggle(i: number): void {
-    this.flipped.update((set) => {
-      const next = new Set(set);
-      next.has(i) ? next.delete(i) : next.add(i);
-      return next;
     });
   }
 

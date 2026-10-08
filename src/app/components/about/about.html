@@ -65,18 +65,12 @@
 
   <!-- Fuera del código -->
   <div class="block">
-    <h3 class="block-title">Fuera del código <span class="hint">(dale la vuelta)</span></h3>
-    <ul class="flip-grid" appScrollReveal appScrollRevealStagger=".flip-card">
-      @for (it of interests; track it.label; let i = $index) {
-        <li>
-          <button type="button" class="flip-card" [class.flipped]="flipped().has(i)" [attr.aria-pressed]="flipped().has(i)"
-            (click)="toggle(i)" [style.--tone]="it.tone">
-            <span class="face front">
-              <span class="flip-icon" aria-hidden="true" [innerHTML]="it.icon"></span>
-              <span class="flip-label">{{ it.label }}</span>
-            </span>
-            <span class="face back">{{ it.back }}</span>
-          </button>
+    <h3 class="block-title">Fuera del código</h3>
+    <ul class="interest-grid" appScrollReveal appScrollRevealStagger=".interest">
+      @for (it of interests; track it.label) {
+        <li class="interest" [style.--tone]="it.tone">
+          <span class="interest-icon" aria-hidden="true" [innerHTML]="it.icon"></span>
+          <span class="interest-label">{{ it.label }}</span>
         </li>
       }
     </ul>

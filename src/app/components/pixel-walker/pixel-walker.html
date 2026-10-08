@@ -1,0 +1,12 @@
+<div class="walker" aria-hidden="true">
+  <span class="dots"></span>
+  <div class="cat">
+    @for (f of frames; track $index; let fi = $index) {
+      <svg [class.on]="fi === 0" [attr.viewBox]="'0 0 ' + width + ' ' + height" shape-rendering="crispEdges">
+        @for (p of f; track $index) {
+          <rect [attr.x]="p.x" [attr.y]="p.y" width="1" height="1" [attr.fill]="p.fill" />
+        }
+      </svg>
+    }
+  </div>
+</div>
