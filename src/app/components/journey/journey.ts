@@ -34,7 +34,7 @@ export class JourneyComponent {
     {
       date: '2019 — 2021',
       title: 'FPS Comunicación Audiovisual',
-      place: 'Formación profesional superior',
+      place: 'Formación profesional de grado superior',
       text: 'Producción, narrativa visual, fotografía. Aprendí a contar historias — ahora lo hago en código.',
       emoji: '◐',
       highlight: false,
