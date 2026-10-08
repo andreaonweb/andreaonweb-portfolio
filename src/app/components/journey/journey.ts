@@ -34,7 +34,7 @@ export class JourneyComponent {
     {
       date: '2019 — 2021',
       title: 'CFGS Comunicación Audiovisual',
-      place: 'Formación profesional de grado superior',
+      place: 'INS Mare de Déu de la Mercè',
       text: 'Producción, narrativa visual, fotografía. Aprendí a contar historias — ahora lo hago en código.',
       emoji: '◐',
       highlight: false,
@@ -42,7 +42,7 @@ export class JourneyComponent {
     {
       date: '2017 — 2019',
       title: 'CFGM Laboratorio de imagen',
-      place: 'Formación profesional de grado medio',
+      place: 'OSCUS',
       text: 'Formación especializada en imagen, iluminación y captación visual.',
       emoji: '◎',
       highlight: false,
