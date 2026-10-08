@@ -111,18 +111,27 @@ nav {
   font-size: 0.88rem;
   transition: background 0.25s, transform 0.25s;
 
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-ink);
-    animation: pulse 2s ease-in-out infinite;
+  .cta-icon {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    transform-origin: 30% 90%;
   }
 
   &:hover {
     background: var(--color-accent-2);
     transform: scale(1.04);
+
+    .cta-icon {
+      animation: chat-wiggle 0.6s ease-in-out;
+    }
   }
+}
+
+@keyframes chat-wiggle {
+  25% { transform: rotate(-14deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-6deg); }
 }
 
 .nav-toggle {
