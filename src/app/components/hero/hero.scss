@@ -213,3 +213,11 @@ h1 {
   40% { opacity: 1; }
   100% { opacity: 0; transform: translateY(12px); }
 }
+
+// En móvil la palabra rotativa va siempre en su propia línea: si no, unas
+// caben en la misma y otras saltan, y el hero entero da saltos al cambiar.
+@media (max-width: 520px) {
+  .rotator .word-wrap {
+    display: block;
+  }
+}

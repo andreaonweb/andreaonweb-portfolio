@@ -316,4 +316,36 @@
     width: 150px;
     height: 160px;
   }
+
+  // Dos tarjetas por fila: en una sola columna la lista ocupaba casi 1500px
+  .do-grid {
+    gap: 12px;
+  }
+
+  .do-item {
+    flex-basis: calc(50% - 6px);
+    gap: 10px;
+    padding: 22px 12px 18px;
+
+    .do-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+
+      ::ng-deep svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    .do-num {
+      top: 10px;
+      right: 12px;
+    }
+
+    p {
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+  }
 }
