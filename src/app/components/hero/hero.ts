@@ -1,13 +1,12 @@
 import { Component, DestroyRef, ElementRef, afterNextRender, inject, signal } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MagneticDirective } from '../../shared/magnetic.directive';
 import { finePointer, reducedMotion } from '../../shared/motion';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [MagneticDirective],
+  imports: [],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })

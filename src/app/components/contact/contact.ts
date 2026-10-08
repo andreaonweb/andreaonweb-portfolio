@@ -2,13 +2,12 @@ import { Component, DestroyRef, ElementRef, afterNextRender, inject, signal } fr
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { MagneticDirective } from '../../shared/magnetic.directive';
 import { reducedMotion } from '../../shared/motion';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [MagneticDirective],
+  imports: [],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
