@@ -33,7 +33,7 @@ export class JourneyComponent {
     },
     {
       date: '2019 — 2021',
-      title: 'FPS Comunicación Audiovisual',
+      title: 'CFGS Comunicación Audiovisual',
       place: 'Formación profesional de grado superior',
       text: 'Producción, narrativa visual, fotografía. Aprendí a contar historias — ahora lo hago en código.',
       emoji: '◐',
@@ -41,7 +41,7 @@ export class JourneyComponent {
     },
     {
       date: '2017 — 2019',
-      title: 'FPM Laboratorio de imagen',
+      title: 'CFGM Laboratorio de imagen',
       place: 'Formación profesional de grado medio',
       text: 'Formación técnica especializada en imagen, iluminación y captación visual.',
       emoji: '◎',
