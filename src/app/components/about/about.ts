@@ -103,7 +103,7 @@ export class AboutComponent {
 
       const stage = root.querySelector('.about-stage');
       gsap.fromTo(
-        root.querySelector('.polaroid'),
+        root.querySelector('.name-tag'),
         { rotate: -14, y: 60 },
         { rotate: -5, y: -20, ease: 'none', scrollTrigger: { trigger: stage, scrub: true } }
       );
@@ -112,11 +112,6 @@ export class AboutComponent {
         { rotate: 12, y: 90 },
         { rotate: 4, y: -30, ease: 'none', scrollTrigger: { trigger: stage, scrub: true } }
       );
-      gsap.to(root.querySelector('.sun'), {
-        attr: { cy: 70 },
-        ease: 'none',
-        scrollTrigger: { trigger: stage, scrub: true },
-      });
     });
   }
 
