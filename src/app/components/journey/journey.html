@@ -1,0 +1,25 @@
+<section id="journey">
+  <div class="section-head" appScrollReveal>
+    <span class="kanji-bg" aria-hidden="true">道</span>
+    <span class="eyebrow">04 · Camino</span>
+    <h2>Mi <em>recorrido</em></h2>
+    <p class="lede">De contar historias con una cámara a contarlas con código.</p>
+  </div>
+
+  <div class="track">
+    <span class="line" aria-hidden="true"><span class="line-fill"></span></span>
+    <ol>
+    @for (s of steps; track s.title; let i = $index) {
+      <li class="step" [class.right]="i % 2 === 1" [class.highlight]="s.highlight">
+        <span class="node" aria-hidden="true">{{ s.emoji }}</span>
+        <div class="step-card">
+          <span class="date">{{ s.date }}</span>
+          <h3>{{ s.title }}</h3>
+          <span class="place">{{ s.place }}</span>
+          <p>{{ s.text }}</p>
+        </div>
+      </li>
+    }
+    </ol>
+  </div>
+</section>

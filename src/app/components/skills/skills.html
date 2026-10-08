@@ -1,15 +1,50 @@
 <section id="skills">
-  <h2>Stack</h2>
-  <div class="skills-grid" appScrollReveal appScrollRevealStagger=".skill-card">
-    <div class="skill-card" *ngFor="let group of groups">
-      <div class="skill-card-head">
-        <span class="skill-card-title">{{ group.title }}</span>
-        <span class="skill-card-kanji" aria-hidden="true">{{ group.kanji }}</span>
-      </div>
-      <div class="skill-card-rule" aria-hidden="true"></div>
-      <ul class="skill-card-list">
-        <li *ngFor="let s of group.skills"><span class="mark" aria-hidden="true">&times;</span> {{ s }}</li>
-      </ul>
+  <div class="section-head" appScrollReveal>
+    <span class="kanji-bg" aria-hidden="true">技</span>
+    <span class="eyebrow">03 · Herramientas</span>
+    <h2>Mi <em>stack</em></h2>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Categorías del stack" (keydown)="onKey($event)">
+    @for (g of groups; track g.title; let i = $index) {
+      <button type="button" role="tab" [id]="'tab-' + i" [attr.aria-selected]="active() === i"
+        [attr.aria-controls]="'panel-skills'" [attr.tabindex]="active() === i ? 0 : -1" [class.active]="active() === i"
+        (click)="select(i)" [style.--tone]="g.tone">
+        <span class="tab-kanji" aria-hidden="true">{{ g.kanji }}</span>
+        <span class="tab-label">{{ g.title }}</span>
+      </button>
+    }
+  </div>
+
+  <div class="panel" id="panel-skills" role="tabpanel" [attr.aria-labelledby]="'tab-' + active()"
+    [style.--tone]="groups[active()].tone">
+    <span class="panel-kanji" aria-hidden="true">{{ groups[active()].kanji }}</span>
+    <p class="panel-meaning" aria-hidden="true">{{ groups[active()].meaning }}</p>
+    <ul class="pills">
+      @for (s of groups[active()].skills; track s; let j = $index) {
+        <li class="pill" [style.--rot]="rotations[j % rotations.length]">{{ s }}</li>
+      }
+    </ul>
+  </div>
+
+  <div class="tech-marquees" aria-hidden="true">
+    <div class="marquee">
+      @for (n of [0, 1]; track n) {
+        <div class="marquee-track">
+          @for (t of row1; track $index) {
+            <span class="tech-chip">{{ t }}</span>
+          }
+        </div>
+      }
+    </div>
+    <div class="marquee reverse">
+      @for (n of [0, 1]; track n) {
+        <div class="marquee-track">
+          @for (t of row2; track $index) {
+            <span class="tech-chip outline">{{ t }}</span>
+          }
+        </div>
+      }
     </div>
   </div>
 </section>

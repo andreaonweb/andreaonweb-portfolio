@@ -1,11 +1,46 @@
+<div class="scroll-progress" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
 <app-navbar></app-navbar>
 <main>
   <app-hero></app-hero>
+
+  <div class="ribbons" aria-hidden="true">
+    <div class="ribbon ribbon-a marquee">
+      @for (n of [0, 1]; track n) {
+        <div class="marquee-track">
+          @for (w of ribbonWords; track w) {
+            <span>{{ w }}</span><span class="star">✦</span>
+          }
+        </div>
+      }
+    </div>
+    <div class="ribbon ribbon-b marquee reverse">
+      @for (n of [0, 1]; track n) {
+        <div class="marquee-track">
+          @for (w of ribbonWords2; track w) {
+            <span>{{ w }}</span><span class="star">✺</span>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <app-projects></app-projects>
   <app-about></app-about>
   <app-skills></app-skills>
-  <app-projects></app-projects>
+  <app-journey></app-journey>
   <app-contact></app-contact>
 </main>
+
 <footer class="site-footer">
-  <p>© {{ year }} Andrea Olivera Romero · Sitio desarrollado siguiendo las pautas de accesibilidad WCAG 2.1 Nivel AA</p>
+  <a class="footer-word" href="#hero" aria-label="Volver arriba">
+    <span aria-hidden="true">aon<em>web</em></span>
+  </a>
+  <div class="footer-row">
+    <p>© {{ year }} Andrea Olivera Romero</p>
+    <p>Hecho a mano con Angular + GSAP · WCAG 2.1 AA</p>
+    <a href="#hero" class="to-top">Volver arriba ↑</a>
+  </div>
 </footer>

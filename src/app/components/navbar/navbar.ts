@@ -1,21 +1,28 @@
 import { Component, ElementRef, HostListener, afterNextRender } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
 export class NavbarComponent {
   scrolled = false;
+  hidden = false;
   menuOpen = false;
   activeSection = 'hero';
 
-  private readonly sectionIds = ['about', 'skills', 'projects', 'contact'];
+  readonly links = [
+    { id: 'projects', label: 'Proyectos' },
+    { id: 'about', label: 'Sobre mí' },
+    { id: 'skills', label: 'Stack' },
+    { id: 'journey', label: 'Recorrido' },
+    { id: 'contact', label: 'Contacto' },
+  ];
+
   private indicator: HTMLElement | null = null;
+  private lastY = 0;
 
   constructor(private el: ElementRef<HTMLElement>) {
     afterNextRender(() => {
@@ -26,13 +33,22 @@ export class NavbarComponent {
 
   @HostListener('window:scroll')
   onScroll() {
-    this.scrolled = window.scrollY > 40;
+    const y = window.scrollY;
+    this.scrolled = y > 40;
+    // Se oculta al bajar y reaparece al subir
+    this.hidden = y > 400 && y > this.lastY;
+    this.lastY = y;
     this.updateActiveSection();
   }
 
   @HostListener('window:resize')
   onResize() {
     this.moveIndicator();
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    if (this.menuOpen) this.closeMenu();
   }
 
   toggleMenu() {
@@ -49,7 +65,7 @@ export class NavbarComponent {
     const viewportCenter = window.innerHeight / 2;
     let current = 'hero';
 
-    for (const id of this.sectionIds) {
+    for (const { id } of this.links) {
       const section = document.getElementById(id);
       if (!section) continue;
       const rect = section.getBoundingClientRect();
@@ -59,17 +75,15 @@ export class NavbarComponent {
       }
     }
 
-    if (current !== this.activeSection) {
-      this.activeSection = current;
-    }
+    this.activeSection = current;
     this.moveIndicator();
   }
 
   private moveIndicator() {
     if (!this.indicator) return;
-    const active = this.el.nativeElement.querySelector<HTMLElement>(`ul a[href="#${this.activeSection}"]`);
+    const active = this.el.nativeElement.querySelector<HTMLElement>(`.links a[href="#${this.activeSection}"]`);
 
-    if (!active) {
+    if (!active || window.innerWidth <= 860) {
       gsap.to(this.indicator, { opacity: 0, duration: 0.2 });
       return;
     }
@@ -78,8 +92,8 @@ export class NavbarComponent {
       opacity: 1,
       x: active.offsetLeft,
       width: active.offsetWidth,
-      duration: 0.3,
-      ease: 'power2.out',
+      duration: 0.4,
+      ease: 'power3.out',
     });
   }
 }

@@ -1,6 +1,10 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
+import { gsap } from 'gsap';
+import { Flip } from 'gsap/Flip';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
+import { TiltDirective } from '../../shared/tilt.directive';
+import { reducedMotion } from '../../shared/motion';
 
 interface Project {
   name: string;
@@ -14,14 +18,16 @@ interface Project {
   repos: { label: string; url: string }[];
 }
 
+type Filter = 'all' | 'Personal' | 'Colaborativo' | 'demo';
+
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [NgFor, NgIf, ScrollRevealDirective],
+  imports: [ScrollRevealDirective, TiltDirective],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
-export class ProjectsComponent implements OnInit, OnDestroy {
+export class ProjectsComponent {
   projects: Project[] = [
     {
       name: 'Nemblex IT',
@@ -146,67 +152,90 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     }
   ];
 
-  private readonly pageSize = 3;
-  private readonly autoplayDelay = 5000;
-  private autoplayId?: ReturnType<typeof setInterval>;
+  readonly filters: { id: Filter; label: string }[] = [
+    { id: 'all', label: 'Todos' },
+    { id: 'Personal', label: 'Personales' },
+    { id: 'Colaborativo', label: 'En equipo' },
+    { id: 'demo', label: 'Con demo' },
+  ];
 
-  currentPage = signal(0);
-  slides: (Project | null)[][] = [];
+  readonly filter = signal<Filter>('all');
+  readonly selected = signal<Project | null>(null);
 
-  ngOnInit(): void {
-    const items: (Project | null)[] = [...this.projects, null];
-    for (let i = 0; i < items.length; i += this.pageSize) {
-      this.slides.push(items.slice(i, i + this.pageSize));
+  @ViewChild('modal') private modal?: ElementRef<HTMLDialogElement>;
+
+  private host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private cdr = inject(ChangeDetectorRef);
+  private opener: HTMLElement | null = null;
+
+  matches(p: Project, f: Filter = this.filter()): boolean {
+    if (f === 'all') return true;
+    if (f === 'demo') return !!p.vercel;
+    return p.type === f;
+  }
+
+  count(f: Filter): number {
+    return this.projects.filter((p) => this.matches(p, f)).length;
+  }
+
+  setFilter(f: Filter): void {
+    if (f === this.filter()) return;
+    gsap.registerPlugin(Flip);
+
+    const cards = this.host.nativeElement.querySelectorAll<HTMLElement>('.card');
+    const state = Flip.getState(cards);
+
+    this.filter.set(f);
+    this.cdr.detectChanges();
+
+    // La altura del grid cambia: recalcular las posiciones de los ScrollTrigger
+    if (reducedMotion()) {
+      ScrollTrigger.refresh();
+      return;
     }
-    this.startAutoplay();
+    Flip.from(state, {
+      onComplete: () => ScrollTrigger.refresh(),
+      duration: 0.6,
+      ease: 'power3.inOut',
+      scale: true,
+      absolute: true,
+      stagger: 0.03,
+      onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, delay: 0.2 }),
+      onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.3 }),
+    });
   }
 
-  ngOnDestroy(): void {
-    this.stopAutoplay();
-  }
+  open(p: Project, event: Event): void {
+    this.opener = event.currentTarget as HTMLElement;
+    this.selected.set(p);
+    this.cdr.detectChanges();
 
-  startAutoplay(): void {
-    this.stopAutoplay();
-    this.autoplayId = setInterval(() => this.next(), this.autoplayDelay);
-  }
+    const dialog = this.modal?.nativeElement;
+    if (!dialog) return;
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
 
-  stopAutoplay(): void {
-    if (this.autoplayId) {
-      clearInterval(this.autoplayId);
-      this.autoplayId = undefined;
+    if (!reducedMotion()) {
+      gsap.fromTo(
+        dialog.querySelector('.modal-inner'),
+        { opacity: 0, y: 40, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }
+      );
     }
   }
 
-  next(): void {
-    const total = this.slides.length;
-    this.currentPage.update(p => (p + 1) % total);
+  close(): void {
+    this.modal?.nativeElement.close();
   }
 
-  prev(): void {
-    const total = this.slides.length;
-    this.currentPage.update(p => (p - 1 + total) % total);
+  onClosed(): void {
+    document.body.style.overflow = '';
+    this.selected.set(null);
+    this.opener?.focus();
   }
 
-  onNext(): void {
-    this.next();
-    this.startAutoplay();
-  }
-
-  onPrev(): void {
-    this.prev();
-    this.startAutoplay();
-  }
-
-  trackByPageIndex(index: number): number {
-    return index;
-  }
-
-  trackByProjectName(index: number, project: Project | null): string {
-    return project ? project.name : 'cta';
-  }
-
-  goTo(index: number): void {
-    this.currentPage.set(index);
-    this.startAutoplay();
+  onBackdrop(event: MouseEvent): void {
+    // Un clic directamente sobre el <dialog> es un clic en el fondo
+    if (event.target === this.modal?.nativeElement) this.close();
   }
 }

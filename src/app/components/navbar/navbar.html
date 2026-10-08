@@ -1,26 +1,27 @@
-<nav [class.scrolled]="scrolled">
-  <a class="logo" href="#hero">
-    <span class="logo-prompt" aria-hidden="true">&gt;</span>
-    <span class="logo-text"><span class="part-white">aon</span><span class="part-accent">web</span><span class="logo-cursor" aria-hidden="true">_</span></span>
+<nav [class.scrolled]="scrolled" [class.hidden]="hidden && !menuOpen" [class.menu-open]="menuOpen" aria-label="Principal">
+  <a class="logo" href="#hero" aria-label="aonweb, inicio">
+    <span class="logo-mark" aria-hidden="true">a</span>
+    <span class="logo-text" aria-hidden="true">aon<em>web</em></span>
   </a>
 
-  <button
-    class="nav-toggle"
-    [class.open]="menuOpen"
-    (click)="toggleMenu()"
-    [attr.aria-expanded]="menuOpen"
-    [attr.aria-label]="menuOpen ? 'Cerrar menú' : 'Abrir menú'"
-  >
-    <span></span>
+  <ul class="links" [class.open]="menuOpen">
+    @for (l of links; track l.id; let i = $index) {
+      <li [style.--i]="i">
+        <a [href]="'#' + l.id" [class.active]="activeSection === l.id" (click)="closeMenu()">
+          <span class="num" aria-hidden="true">0{{ i + 1 }}</span>{{ l.label }}
+        </a>
+      </li>
+    }
+    <span class="nav-indicator" aria-hidden="true"></span>
+  </ul>
+
+  <a class="nav-cta" href="mailto:andreaonweb.dev@gmail.com">
+    <span class="dot" aria-hidden="true"></span>Hablemos
+  </a>
+
+  <button class="nav-toggle" type="button" [class.open]="menuOpen" (click)="toggleMenu()"
+    [attr.aria-expanded]="menuOpen" [attr.aria-label]="menuOpen ? 'Cerrar menú' : 'Abrir menú'">
     <span></span>
     <span></span>
   </button>
-
-  <ul [class.open]="menuOpen">
-    <li><a href="#about" [class.active]="activeSection === 'about'" (click)="closeMenu()">Sobre mí</a></li>
-    <li><a href="#skills" [class.active]="activeSection === 'skills'" (click)="closeMenu()">Skills</a></li>
-    <li><a href="#projects" [class.active]="activeSection === 'projects'" (click)="closeMenu()">Proyectos</a></li>
-    <li><a href="#contact" [class.active]="activeSection === 'contact'" (click)="closeMenu()">Contacto</a></li>
-    <span class="nav-indicator"></span>
-  </ul>
 </nav>
