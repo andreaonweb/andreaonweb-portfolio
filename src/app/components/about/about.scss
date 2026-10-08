@@ -1,4 +1,4 @@
-// ── Escenario: pegatina · texto · ficha ─────────────────
+// ── Escenario: ordenador · texto · ficha ─────────────────
 .about-stage {
   display: grid;
   grid-template-columns: 240px 1fr 240px;
@@ -7,76 +7,146 @@
   margin-bottom: 110px;
 }
 
-.name-tag {
+.buddy {
   position: relative;
-  border-radius: 14px;
-  background: var(--color-accent);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
-  text-align: center;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
   transition: scale 0.4s var(--ease-out);
-
-  .tag-head {
-    padding: 18px 12px 12px;
-    color: var(--color-paper);
-    line-height: 1;
-  }
-
-  .tag-hello {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 2.2rem;
-    letter-spacing: 0.04em;
-  }
-
-  .tag-sub {
-    display: block;
-    margin-top: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .tag-body {
-    display: grid;
-    place-items: center;
-    min-height: 120px;
-    margin: 0 10px;
-    border-radius: 6px;
-    background: var(--color-paper);
-  }
-
-  .tag-name {
-    font-family: var(--font-retro);
-    font-style: italic;
-    font-variation-settings: 'SOFT' 100, 'WONK' 1;
-    font-weight: 800;
-    font-size: 2.6rem;
-    color: var(--color-ink);
-    rotate: -4deg;
-  }
-
-  .tag-foot {
-    padding: 10px 12px 12px;
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.1em;
-    color: var(--color-paper);
-  }
-
-  .tape {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    width: 90px;
-    height: 26px;
-    margin-left: -45px;
-    background: rgba(232, 181, 60, 0.75);
-    transform: rotate(-4deg);
-  }
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     scale: 1.04;
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--color-accent-2);
+    outline-offset: 8px;
+    border-radius: 20px;
+  }
+
+  .buddy-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .body {
+    animation: bob 2.6s ease-in-out infinite;
+  }
+
+  .shadow {
+    fill: rgba(0, 0, 0, 0.45);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: shadow 2.6s ease-in-out infinite;
+  }
+
+  .eyes ellipse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: blink 4.2s infinite;
+  }
+
+  .pupils {
+    transition: transform 0.15s ease-out;
+  }
+
+  .led {
+    animation: led 1.6s steps(1) infinite;
+  }
+
+  .happy-eyes,
+  .mouth-open {
+    opacity: 0;
+  }
+
+  // Al hacer clic: ojos ^^, boca abierta y salto
+  &.happy {
+    .eyes,
+    .mouth {
+      opacity: 0;
+    }
+
+    .happy-eyes,
+    .mouth-open {
+      opacity: 1;
+    }
+
+    .buddy-svg {
+      animation: jump 0.6s var(--ease-out);
+    }
+  }
+}
+
+.floaty {
+  position: absolute;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  pointer-events: none;
+  animation: floaty 5s ease-in-out infinite;
+
+  &.f1 { top: 4%; left: -6%; color: var(--color-accent); font-size: 1.1rem; }
+  &.f2 { top: 0; right: -4%; color: var(--color-accent-2); font-size: 1rem; animation-delay: -1.3s; }
+  &.f3 { top: 46%; right: -10%; color: var(--color-accent-4); font-size: 1.2rem; animation-delay: -2.6s; }
+  &.f4 { top: 52%; left: -10%; color: var(--color-accent-3); font-size: 1.4rem; animation-delay: -3.8s; }
+}
+
+// Corazones que crea about.ts al hacer clic (fuera del encapsulado de Angular)
+:host ::ng-deep .heart {
+  position: absolute;
+  z-index: 2;
+  color: var(--color-accent-4);
+  font-size: 1.3rem;
+  pointer-events: none;
+  animation: heart 1s var(--ease-out) forwards;
+}
+
+@keyframes bob {
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shadow {
+  50% { transform: scaleX(0.8); opacity: 0.6; }
+}
+
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+@keyframes led {
+  50% { opacity: 0.25; }
+}
+
+@keyframes jump {
+  30% { transform: translateY(-18px) rotate(-4deg); }
+  60% { transform: translateY(0) rotate(3deg); }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(-8deg); opacity: 0.55; }
+  50% { transform: translateY(-14px) rotate(8deg); opacity: 1; }
+}
+
+@keyframes heart {
+  from { transform: translate(-50%, 0) scale(0.4); opacity: 1; }
+  to { transform: translate(calc(-50% + var(--dx)), -70px) scale(1.2); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buddy .body,
+  .buddy .shadow,
+  .buddy .eyes ellipse,
+  .buddy .led,
+  .buddy.happy .buddy-svg,
+  .floaty {
+    animation: none;
   }
 }
 
@@ -328,7 +398,7 @@
     justify-items: center;
   }
 
-  .name-tag,
+  .buddy,
   .id-card {
     width: min(260px, 100%);
   }

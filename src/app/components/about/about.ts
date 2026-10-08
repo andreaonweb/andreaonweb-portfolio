@@ -1,9 +1,9 @@
-import { Component, ElementRef, afterNextRender, inject } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
-import { reducedMotion } from '../../shared/motion';
+import { finePointer, reducedMotion } from '../../shared/motion';
 
 const svg = (body: string) =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
@@ -18,6 +18,7 @@ const svg = (body: string) =>
 export class AboutComponent {
   private sanitizer = inject(DomSanitizer);
   private el = inject<ElementRef<HTMLElement>>(ElementRef);
+  private destroyRef = inject(DestroyRef);
 
   readonly interests = [
     {
@@ -99,11 +100,13 @@ export class AboutComponent {
         });
       });
 
+      this.setupBuddy(root);
+
       if (reducedMotion()) return;
 
       const stage = root.querySelector('.about-stage');
       gsap.fromTo(
-        root.querySelector('.name-tag'),
+        root.querySelector('.buddy'),
         { rotate: -14, y: 60 },
         { rotate: -5, y: -20, ease: 'none', scrollTrigger: { trigger: stage, scrub: true } }
       );
@@ -112,6 +115,57 @@ export class AboutComponent {
         { rotate: 12, y: 90 },
         { rotate: 4, y: -30, ease: 'none', scrollTrigger: { trigger: stage, scrub: true } }
       );
+    });
+  }
+
+  // Ordenador: se alegra (y suelta corazones) al hacer clic; en escritorio sigue el ratón con la mirada
+  private setupBuddy(root: HTMLElement): void {
+    const buddy = root.querySelector<HTMLElement>('.buddy');
+    const pupils = root.querySelector<SVGGElement>('.buddy .pupils');
+    if (!buddy || !pupils) return;
+
+    let happyTimer: ReturnType<typeof setTimeout> | undefined;
+    const onClick = () => {
+      buddy.classList.remove('happy');
+      void buddy.offsetWidth; // reinicia la animación de salto
+      buddy.classList.add('happy');
+      clearTimeout(happyTimer);
+      happyTimer = setTimeout(() => buddy.classList.remove('happy'), 1400);
+      if (reducedMotion()) return;
+      for (let i = 0; i < 5; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'heart';
+        heart.textContent = '♥';
+        heart.setAttribute('aria-hidden', 'true');
+        heart.style.left = `${35 + Math.random() * 30}%`;
+        heart.style.top = '20%';
+        heart.style.setProperty('--dx', `${(Math.random() - 0.5) * 90}px`);
+        heart.style.animationDelay = `${i * 70}ms`;
+        heart.addEventListener('animationend', () => heart.remove());
+        buddy.appendChild(heart);
+      }
+    };
+    buddy.addEventListener('click', onClick);
+
+    let frame = 0;
+    const onMove = (e: PointerEvent) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const r = buddy.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height * 0.38);
+        const angle = Math.atan2(dy, dx);
+        const dist = Math.min(5, Math.hypot(dx, dy) / 40);
+        pupils.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px)`;
+      });
+    };
+    if (finePointer() && !reducedMotion()) window.addEventListener('pointermove', onMove, { passive: true });
+
+    this.destroyRef.onDestroy(() => {
+      buddy.removeEventListener('click', onClick);
+      window.removeEventListener('pointermove', onMove);
+      cancelAnimationFrame(frame);
+      clearTimeout(happyTimer);
     });
   }
 

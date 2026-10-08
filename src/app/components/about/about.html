@@ -5,18 +5,50 @@
   </div>
 
   <div class="about-stage">
-    <!-- Pegatina "Hola, me llamo" -->
-    <div class="name-tag" aria-hidden="true">
-      <span class="tape"></span>
-      <div class="tag-head">
-        <span class="tag-hello">HOLA</span>
-        <span class="tag-sub">me llamo</span>
-      </div>
-      <div class="tag-body">
-        <span class="tag-name">Andrea</span>
-      </div>
-      <div class="tag-foot">est. 1996</div>
-    </div>
+    <!-- Ordenador con cara: parpadea, sigue el ratón y se alegra al hacer clic -->
+    <button type="button" class="buddy" aria-label="Ordenador animado, haz clic para saludarlo">
+      <span class="floaty f1" aria-hidden="true">&lt;/&gt;</span>
+      <span class="floaty f2" aria-hidden="true">{{ '{ }' }}</span>
+      <span class="floaty f3" aria-hidden="true">★</span>
+      <span class="floaty f4" aria-hidden="true">;</span>
+
+      <svg class="buddy-svg" viewBox="0 0 240 210" aria-hidden="true">
+        <defs>
+          <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="4" height="2" fill="rgba(244, 234, 215, 0.04)" />
+          </pattern>
+        </defs>
+        <ellipse class="shadow" cx="120" cy="200" rx="64" ry="7" />
+        <g class="body">
+          <rect x="104" y="158" width="32" height="18" fill="#d9cdb4" stroke="#1b1813" stroke-width="4" />
+          <rect x="70" y="172" width="100" height="16" rx="8" fill="#f4ead7" stroke="#1b1813" stroke-width="4" />
+          <rect x="28" y="18" width="184" height="144" rx="20" fill="#f4ead7" stroke="#1b1813" stroke-width="4" />
+          <rect x="46" y="34" width="148" height="104" rx="12" fill="#221e18" stroke="#1b1813" stroke-width="4" />
+          <rect x="46" y="34" width="148" height="104" rx="12" fill="url(#scan)" />
+          <circle class="led" cx="192" cy="150" r="4" fill="#71c39d" />
+          <rect x="54" y="148" width="40" height="5" rx="2.5" fill="#d9cdb4" />
+
+          <g class="face">
+            <g class="eyes">
+              <ellipse cx="96" cy="80" rx="11" ry="13" fill="#71c39d" />
+              <ellipse cx="144" cy="80" rx="11" ry="13" fill="#71c39d" />
+              <g class="pupils">
+                <circle cx="96" cy="80" r="5" fill="#14120f" />
+                <circle cx="144" cy="80" r="5" fill="#14120f" />
+              </g>
+            </g>
+            <g class="happy-eyes" fill="none" stroke="#71c39d" stroke-width="5" stroke-linecap="round">
+              <path d="M85 84 Q96 68 107 84" />
+              <path d="M133 84 Q144 68 155 84" />
+            </g>
+            <ellipse cx="78" cy="106" rx="9" ry="5" fill="#e7816b" opacity="0.55" />
+            <ellipse cx="162" cy="106" rx="9" ry="5" fill="#e7816b" opacity="0.55" />
+            <path class="mouth" d="M108 106 Q120 116 132 106" fill="none" stroke="#71c39d" stroke-width="4" stroke-linecap="round" />
+            <path class="mouth-open" d="M106 104 Q120 126 134 104 Z" fill="#71c39d" />
+          </g>
+        </g>
+      </svg>
+    </button>
 
     <div class="about-text" appScrollReveal appScrollRevealStagger="p">
       <p class="statement">
