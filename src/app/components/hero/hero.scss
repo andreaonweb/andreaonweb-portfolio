@@ -8,6 +8,21 @@ section {
   overflow: hidden;
 }
 
+// Rayos retro tipo "sunburst" que se desvanecen hacia los bordes
+.hero-rays {
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 58%,
+    rgba(232, 181, 60, 0.07) 0deg 4.5deg,
+    rgba(0, 0, 0, 0.18) 4.5deg 9deg
+  );
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 58%, #000 10%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 58%, #000 10%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
 .hero-glow {
   position: absolute;
   top: 50%;
@@ -44,21 +59,31 @@ h1 {
   letter-spacing: -0.03em;
   margin: 0 0 18px;
 
+  // Hueco extra a la derecha y abajo para que la máscara no recorte las sombras
   .char-mask {
     display: inline-block;
     overflow: hidden;
-    padding: 0 0.08em 0.1em 0.01em;
-    margin-right: -0.07em;
+    padding: 0 0.13em 0.14em 0.01em;
+    margin-right: -0.12em;
   }
 
+  // Sombras apiladas estilo retro: "aon" con coral, "web" con verde y amarillo
   .char {
     display: inline-block;
     color: var(--color-text);
+    text-shadow:
+      0.025em 0.025em 0 var(--color-ink),
+      0.045em 0.045em 0 var(--color-accent-4),
+      0.06em 0.06em 0 var(--color-ink);
     transition: color 0.3s, transform 0.4s var(--ease-out);
 
     &.accent {
       color: var(--color-accent);
-      text-shadow: 0.04em 0.04em 0 var(--color-accent-3);
+      text-shadow:
+        0.025em 0.025em 0 var(--color-ink),
+        0.045em 0.045em 0 var(--color-accent-3),
+        0.065em 0.065em 0 var(--color-ink),
+        0.085em 0.085em 0 var(--color-accent-2);
     }
 
     &:hover {
