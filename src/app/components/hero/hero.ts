@@ -12,7 +12,7 @@ import { finePointer, reducedMotion } from '../../shared/motion';
 })
 export class HeroComponent {
   readonly nameChars = 'aonweb'.split('');
-  readonly words = ['IA aplicada', 'Angular', 'Spring Boot', 'Python'];
+  readonly words = ['IA aplicada', 'Angular', 'React', 'Spring Boot', 'Python'];
   readonly wordIndex = signal(0);
 
   private el = inject<ElementRef<HTMLElement>>(ElementRef);
