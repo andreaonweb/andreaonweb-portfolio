@@ -67,7 +67,7 @@ export class HeroComponent {
       clearProps: 'transform',
     })
       .from(
-        root.querySelectorAll('.rotator, .description, .cta, .badge, .scroll-cue'),
+        root.querySelectorAll('.rotator, .description, .cta, .scroll-cue'),
         { opacity: 0, y: 24, duration: 0.7, stagger: 0.1 },
         0.5
       );

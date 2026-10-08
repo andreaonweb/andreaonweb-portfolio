@@ -153,53 +153,6 @@ h1 {
   }
 }
 
-// ── Badge giratorio ─────────────────────────────────────
-.badge {
-  position: absolute;
-  right: 4%;
-  bottom: 6%;
-  z-index: 3;
-  width: 120px;
-  height: 120px;
-  display: grid;
-  place-items: center;
-
-  .badge-text {
-    position: absolute;
-    inset: 0;
-    animation: spin 14s linear infinite;
-    fill: var(--color-text-soft);
-    font-family: var(--font-mono);
-    font-size: 10.4px;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-  }
-
-  .badge-core {
-    display: grid;
-    place-items: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: var(--color-accent-2);
-    color: var(--color-ink);
-    font-size: 1.3rem;
-    font-weight: 700;
-    transition: transform 0.4s var(--ease-out), background 0.3s;
-  }
-
-  &:hover {
-    .badge-text {
-      animation-duration: 4s;
-    }
-
-    .badge-core {
-      transform: scale(1.15) rotate(45deg);
-      background: var(--color-accent);
-    }
-  }
-}
-
 
 .scroll-cue {
   position: absolute;
@@ -235,9 +188,3 @@ h1 {
   40% { opacity: 1; }
   100% { opacity: 0; transform: translateY(12px); }
 }
-
-@media (max-width: 860px) {
-  .badge { display: none; }
-}
-
-
