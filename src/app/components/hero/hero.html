@@ -9,23 +9,6 @@
       <span class="hud-2up">2UP <b>000000</b></span>
     </div>
 
-    <!-- Marcianos sueltos por los márgenes, cada uno a su ritmo -->
-    @for (inv of invaders; track $index) {
-      <svg
-        class="invader"
-        [class.desktop-only]="!inv.mobile"
-        [attr.viewBox]="'0 0 ' + inv.sprite.w + ' 8'"
-        shape-rendering="crispEdges"
-        [style.--x.%]="inv.x"
-        [style.--y.%]="inv.y"
-        [style.--c]="inv.color"
-        [style.--d.s]="inv.delay"
-      >
-        <path class="frame-a" [attr.d]="inv.sprite.a" />
-        <path class="frame-b" [attr.d]="inv.sprite.b" />
-      </svg>
-    }
-
     <div class="hud hud-bottom">
       <span>CREDIT <b>01</b></span>
       <span class="blink">INSERT COIN</span>

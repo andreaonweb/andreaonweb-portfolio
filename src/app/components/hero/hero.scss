@@ -51,23 +51,6 @@ section {
   }
 }
 
-// Marcianos sueltos: cada uno salta de lado a lado y alterna fotogramas, desfasados entre sí
-.invader {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  height: clamp(14px, 2vw, 22px);
-  width: auto;
-  fill: var(--c);
-  opacity: 0.16;
-  overflow: visible;
-  animation: hop 4s steps(4) infinite alternate;
-  animation-delay: var(--d);
-
-  .frame-a { animation: frame 1s steps(1) infinite; }
-  .frame-b { visibility: hidden; animation: frame 1s steps(1) infinite reverse; }
-}
-
 // Panel de mandos: joystick y botones pegados a los lados, alineados con el HUD
 .controls {
   position: absolute;
@@ -151,16 +134,6 @@ section {
   opacity: 0.6;
 }
 
-@keyframes hop {
-  from { transform: translate(-50%, 0); }
-  to { transform: translate(calc(-50% + 24px), 6px); }
-}
-
-@keyframes frame {
-  0% { visibility: visible; }
-  50% { visibility: hidden; }
-}
-
 @keyframes wiggle {
   0%, 30%, 100% { transform: rotate(0); }
   40% { transform: rotate(-14deg); }
@@ -178,15 +151,9 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .arcade *,
-  .arcade .invader path {
+  .arcade * {
     animation: none !important;
   }
-}
-
-// Hasta tablet el texto ya roza los márgenes: solo quedan los marcianos pegados al borde
-@media (max-width: 1024px) {
-  .invader.desktop-only { display: none; }
 }
 
 // Pantallas estrechas: menos HUD y panel más compacto para no saturar
@@ -199,12 +166,6 @@ section {
   .hud-top { top: 84px; }
   .hud-2up { display: none; }
   .hud-bottom { bottom: 28px; }
-
-  // Más pequeños y tenues: aquí el texto ocupa casi todo el ancho
-  .invader {
-    height: 12px;
-    opacity: 0.12;
-  }
 
   .controls {
     bottom: 64px;
