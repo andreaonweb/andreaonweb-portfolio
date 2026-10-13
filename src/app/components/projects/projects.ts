@@ -185,11 +185,13 @@ export class ProjectsComponent {
 
   @ViewChild('modal') private modal?: ElementRef<HTMLDialogElement>;
   @ViewChild('track') private track?: ElementRef<HTMLElement>;
+  @ViewChild('zoom') private zoom?: ElementRef<HTMLDialogElement>;
 
   private host = inject<ElementRef<HTMLElement>>(ElementRef);
   private cdr = inject(ChangeDetectorRef);
   private opener: HTMLElement | null = null;
   private scrollTimer?: ReturnType<typeof setTimeout>;
+  private zoomOpener: HTMLElement | null = null;
 
   matches(p: Project, f: Filter = this.filter()): boolean {
     if (f === 'all') return true;
@@ -285,6 +287,24 @@ export class ProjectsComponent {
     else if (event.key === 'ArrowRight') this.goTo(this.slide() + 1);
     else return;
     event.preventDefault();
+  }
+
+  openZoom(): void {
+    this.zoomOpener = document.activeElement as HTMLElement | null;
+    this.zoom?.nativeElement.showModal();
+  }
+
+  closeZoom(): void {
+    this.zoom?.nativeElement.close();
+    // La captura activa puede haber cambiado: devolver el foco a su botón de ampliar
+    const current = this.track?.nativeElement.children[this.slide()]?.querySelector<HTMLElement>('.zoom-btn');
+    (current ?? this.zoomOpener)?.focus();
+  }
+
+  onZoomBackdrop(event: MouseEvent): void {
+    // Clic fuera de la imagen y de los controles cierra el visor
+    const target = event.target as HTMLElement;
+    if (target === this.zoom?.nativeElement || target.tagName === 'IMG') this.closeZoom();
   }
 
   onBackdrop(event: MouseEvent): void {

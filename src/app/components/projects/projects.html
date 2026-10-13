@@ -73,9 +73,13 @@
           (keydown)="onGalleryKey($event)">
           <div class="gallery-track" #track (scroll)="onTrackScroll()">
             @for (shot of p.gallery; track shot.src; let i = $index) {
+              <!-- inert: las capturas que no se ven no se pueden enfocar ni las lee el lector de pantalla -->
               <figure class="gallery-slide" role="group" aria-roledescription="captura"
-                [attr.aria-label]="(i + 1) + ' de ' + p.gallery.length" [attr.aria-hidden]="i !== slide()">
-                <img [src]="shot.src" [alt]="p.name + ': ' + shot.caption" [attr.loading]="i === 0 ? 'eager' : 'lazy'" />
+                [attr.aria-label]="(i + 1) + ' de ' + p.gallery.length" [inert]="i !== slide()">
+                <button type="button" class="zoom-btn" (click)="openZoom()" [attr.aria-label]="'Ampliar captura: ' + shot.caption">
+                  <img [src]="shot.src" [alt]="p.name + ': ' + shot.caption" [attr.loading]="i === 0 ? 'eager' : 'lazy'" />
+                  <span class="zoom-hint" aria-hidden="true">⤢</span>
+                </button>
               </figure>
             }
           </div>
@@ -126,5 +130,25 @@
         </div>
       </div>
     }
+
+    <!-- Visor a pantalla completa: un segundo <dialog> encima del modal (Esc cierra solo este) -->
+    <dialog class="lightbox" #zoom (click)="onZoomBackdrop($event)" (keydown)="onGalleryKey($event)"
+      (cancel)="$event.preventDefault(); closeZoom()"
+      aria-label="Captura ampliada">
+      @if (selected(); as p) {
+        @if (p.gallery[slide()]; as shot) {
+          <img [src]="shot.src" [alt]="p.name + ': ' + shot.caption" />
+          <p class="lightbox-caption" aria-live="polite">
+            <span class="gallery-count">{{ slide() + 1 }} / {{ p.gallery.length }}</span>
+            {{ shot.caption }}
+          </p>
+        }
+        <button type="button" class="lightbox-close" (click)="closeZoom()" aria-label="Cerrar captura ampliada">×</button>
+        @if (p.gallery.length > 1) {
+          <button type="button" class="gallery-nav prev" (click)="goTo(slide() - 1)" aria-label="Captura anterior">‹</button>
+          <button type="button" class="gallery-nav next" (click)="goTo(slide() + 1)" aria-label="Captura siguiente">›</button>
+        }
+      }
+    </dialog>
   </dialog>
 </section>

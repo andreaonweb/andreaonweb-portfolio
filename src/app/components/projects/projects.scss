@@ -415,14 +415,118 @@
   place-items: center;
   // Hueco lateral para que las flechas no tapen la captura
   padding: 18px 64px 0;
+  // La captura se limita al hueco del slide con unidades cq (ver .zoom-btn img)
+  container-type: size;
+}
 
-  // Las capturas tienen proporciones distintas: se ven enteras, sin recortar
+// La captura entera es el botón de ampliar; se ajusta al tamaño de la imagen
+.zoom-btn {
+  position: relative;
+  display: block;
+  line-height: 0;
+  cursor: zoom-in;
+
+  img {
+    display: block;
+    max-width: 100cqw;
+    max-height: 100cqh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .zoom-hint {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(27, 24, 19, 0.8);
+    color: var(--color-text);
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &:hover,
+  &:focus-visible {
+    img { transform: scale(1.015); }
+    .zoom-hint { opacity: 1; }
+  }
+
+  // En táctil no hay hover: el icono se queda visible para que se sepa que se puede ampliar
+  @media (hover: none) {
+    .zoom-hint { opacity: 1; }
+  }
+}
+
+// ── Visor a pantalla completa ──
+.lightbox {
+  // 100% y no 100vw: 100vw incluye la barra de scroll y descentraría la imagen
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 56px 72px 64px;
+  border: none;
+  background: rgba(10, 9, 7, 0.94);
+  color: var(--color-text);
+
+  &[open] {
+    display: grid;
+    // Celda acotada: así max-height: 100% de la imagen sí se resuelve
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    place-items: center;
+  }
+
+  &::backdrop {
+    background: transparent;
+  }
+
   img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+    cursor: zoom-out;
+  }
+
+  .gallery-nav {
+    top: 50%;
+  }
+}
+
+.lightbox-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-text);
+  color: var(--color-ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 0.4s var(--ease-out), background 0.3s;
+
+  &:hover {
+    transform: rotate(90deg);
+    background: var(--color-accent-2);
   }
 }
 
@@ -616,6 +720,22 @@
 
   .gallery-bar {
     padding: 10px 14px 12px;
+  }
+
+  .lightbox {
+    padding: 64px 12px 72px;
+
+    // En móvil las flechas van abajo, a los lados del pie, para dejar todo el ancho a la captura
+    .gallery-nav {
+      top: auto;
+      bottom: 12px;
+      transform: none;
+    }
+  }
+
+  .lightbox-caption {
+    bottom: 22px;
+    padding: 0 56px;
   }
 
   .modal-body {
