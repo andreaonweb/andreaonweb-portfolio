@@ -8,94 +8,225 @@ section {
   overflow: hidden;
 }
 
-// Estrellas pixel: dos capas con tamaños de mosaico primos para que no se note la repetición
-.hero-stars {
+// ── Recreativa en modo "attract" ─────────────────────────
+// Todo el decorado vive en .arcade, con opacidad baja para no competir con el texto.
+.arcade {
   position: absolute;
-  inset: 0 0 35%;
+  inset: 0;
   pointer-events: none;
-  mask-image: linear-gradient(#000 30%, transparent);
-  -webkit-mask-image: linear-gradient(#000 30%, transparent);
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    animation: twinkle 3.2s steps(2) infinite;
-  }
-
-  &::before {
-    background:
-      radial-gradient(circle, var(--color-paper) 1.2px, transparent 1.6px) 0 0 / 173px 173px,
-      radial-gradient(circle, var(--color-accent-2) 1.2px, transparent 1.6px) 60px 90px / 211px 211px;
-    opacity: 0.7;
-  }
-
-  &::after {
-    background:
-      radial-gradient(circle, var(--color-paper) 1px, transparent 1.4px) 40px 20px / 131px 131px,
-      radial-gradient(circle, var(--color-accent) 1.4px, transparent 1.8px) 110px 70px / 257px 257px;
-    animation-delay: -1.6s;
-    opacity: 0.55;
-  }
+  color: var(--color-paper);
+  font-family: var(--font-pixel);
 }
 
-// Suelo retro: rejilla en perspectiva que avanza hacia la pantalla
-.hero-grid {
+.hud {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 48%;
-  perspective: 320px;
-  perspective-origin: 50% 0;
-  overflow: hidden;
-  pointer-events: none;
-  mask-image: linear-gradient(transparent, #000 35%, #000 70%, transparent);
-  -webkit-mask-image: linear-gradient(transparent, #000 35%, #000 70%, transparent);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1040px, calc(100% - 48px));
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  white-space: nowrap;
+  opacity: 0.32;
 
-  // Línea de horizonte
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-accent-4) 30%, var(--color-accent-2) 50%, var(--color-accent-4) 70%, transparent);
-    opacity: 0.6;
-    z-index: 1;
-  }
-
-  .grid-plane {
-    position: absolute;
-    left: -50%;
-    width: 200%;
-    top: 0;
-    height: 200%;
-    background-image:
-      linear-gradient(90deg, rgba(169, 125, 194, 0.32) 2px, transparent 2px),
-      linear-gradient(rgba(169, 125, 194, 0.32) 2px, transparent 2px);
-    background-size: 64px 64px;
-    transform: rotateX(72deg);
-    transform-origin: 50% 0;
-    animation: grid-run 2.4s linear infinite;
+  b {
+    font-weight: 400;
+    color: var(--color-accent-2);
   }
 }
 
-@keyframes grid-run {
-  to { background-position: 0 64px; }
+.hud-top {
+  top: 96px;
 }
 
-@keyframes twinkle {
-  50% { opacity: 0.2; }
+.hud-bottom {
+  bottom: 40px;
+
+  .blink {
+    color: var(--color-accent-4);
+    animation: blink 1.1s steps(1) infinite;
+  }
+}
+
+// Formación de marcianos: marcha de lado a lado a saltos, como el original
+.invaders {
+  position: absolute;
+  top: 136px;
+  left: 50%;
+  width: min(460px, 70vw);
+  margin-left: calc(min(460px, 70vw) / -2);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0.13;
+  animation: march 8s steps(8) infinite alternate;
+}
+
+.invader-row {
+  display: flex;
+  justify-content: space-between;
+
+  &:first-child { color: var(--color-accent); }
+  &:last-child { color: var(--color-accent-3); }
+}
+
+.invader {
+  height: clamp(14px, 2.6vw, 22px);
+  width: auto;
+  fill: currentColor;
+  overflow: visible;
+
+  .frame-b { visibility: hidden; }
+}
+
+// Alterna fotogramas (la animación cambia de 'visibility' a saltos)
+.invader .frame-a { animation: frame 1s steps(1) infinite; }
+.invader .frame-b { animation: frame 1s steps(1) infinite reverse; }
+
+// Panel de mandos: joystick y botones pegados a los lados, alineados con el HUD
+.controls {
+  position: absolute;
+  left: 50%;
+  bottom: 84px;
+  transform: translateX(-50%);
+  width: min(1040px, calc(100% - 48px));
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  opacity: 0.22;
+}
+
+.joystick {
+  position: relative;
+  width: 56px;
+  height: 64px;
+
+  .base {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: 0;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-muted);
+  }
+
+  .stick {
+    position: absolute;
+    left: 50%;
+    bottom: 6px;
+    width: 6px;
+    height: 40px;
+    margin-left: -3px;
+    border-radius: 3px;
+    background: var(--color-paper);
+    transform-origin: 50% 100%;
+    animation: wiggle 3.6s ease-in-out infinite;
+  }
+
+  .ball {
+    position: absolute;
+    left: 50%;
+    bottom: 38px;
+    width: 26px;
+    height: 26px;
+    margin-left: -13px;
+    border-radius: 50%;
+    background: var(--color-accent-4);
+    transform-origin: 50% 46px;
+    animation: wiggle 3.6s ease-in-out infinite;
+  }
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 26px);
+  gap: 10px 14px;
+
+  .btn-arcade {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.35);
+    animation: press 3.2s steps(1) infinite;
+    animation-delay: calc(var(--i) * 0.8s);
+
+    &:nth-child(even) { transform: translateY(-8px); }
+  }
+}
+
+// Capa CRT: líneas de barrido + viñeta, como el cristal de la pantalla
+.crt {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(transparent 0 2px, rgba(0, 0, 0, 0.22) 2px 4px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  opacity: 0.6;
+}
+
+@keyframes march {
+  from { transform: translateX(-12%); }
+  to { transform: translateX(12%); }
+}
+
+@keyframes frame {
+  0% { visibility: visible; }
+  50% { visibility: hidden; }
+}
+
+@keyframes wiggle {
+  0%, 30%, 100% { transform: rotate(0); }
+  40% { transform: rotate(-14deg); }
+  55% { transform: rotate(12deg); }
+  70% { transform: rotate(-6deg); }
+}
+
+@keyframes press {
+  0% { filter: brightness(1.6); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.35); }
+  25% { filter: none; box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.35); }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-grid .grid-plane,
-  .hero-stars::before,
-  .hero-stars::after {
-    animation: none;
+  .arcade *,
+  .arcade .invader path {
+    animation: none !important;
+  }
+}
+
+// Pantallas estrechas: menos HUD y panel más compacto para no saturar
+@media (max-width: 640px) {
+  .hud {
+    width: calc(100% - 32px);
+    font-size: 0.48rem;
+  }
+
+  .hud-top { top: 84px; }
+  .hud-2up { display: none; }
+  .hud-bottom { bottom: 28px; }
+
+  // Aquí la formación queda detrás del título: más tenue y con menos columnas
+  .invaders {
+    top: 116px;
+    gap: 10px;
+    opacity: 0.09;
+  }
+
+  .invader:nth-child(n + 7) { display: none; }
+
+  .controls {
+    bottom: 64px;
+    width: calc(100% - 32px);
+    transform: translateX(-50%) scale(0.75);
+    transform-origin: 50% 100%;
   }
 }
 

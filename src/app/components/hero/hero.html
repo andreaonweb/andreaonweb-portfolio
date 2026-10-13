@@ -1,7 +1,44 @@
 <section id="hero">
-  <div class="hero-stars" aria-hidden="true"></div>
-  <div class="hero-grid" aria-hidden="true"><div class="grid-plane"></div></div>
   <div class="hero-glow" aria-hidden="true"></div>
+
+  <!-- Pantalla de recreativa en modo "attract": decorativo, por eso todo va aria-hidden -->
+  <div class="arcade" aria-hidden="true">
+    <div class="hud hud-top">
+      <span>1UP <b>004096</b></span>
+      <span class="hud-hi">HI-SCORE <b>999999</b></span>
+      <span class="hud-2up">2UP <b>000000</b></span>
+    </div>
+
+    <div class="invaders">
+      @for (row of invaderRows; track $index) {
+        <div class="invader-row">
+          @for (n of invaderCols; track $index) {
+            <svg class="invader" [attr.viewBox]="'0 0 ' + row.w + ' 8'" shape-rendering="crispEdges">
+              <path class="frame-a" [attr.d]="row.a" />
+              <path class="frame-b" [attr.d]="row.b" />
+            </svg>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="hud hud-bottom">
+      <span>CREDIT <b>01</b></span>
+      <span class="blink">INSERT COIN</span>
+    </div>
+
+    <!-- Panel de mandos: joystick y botones a los lados, lejos del texto -->
+    <div class="controls">
+      <div class="joystick"><span class="stick"></span><span class="ball"></span><span class="base"></span></div>
+      <div class="buttons">
+        @for (b of buttons; track $index) {
+          <span class="btn-arcade" [style.--c]="b" [style.--i]="$index"></span>
+        }
+      </div>
+    </div>
+
+    <div class="crt"></div>
+  </div>
 
   <div class="hero-inner">
     <h1 aria-label="aonweb">

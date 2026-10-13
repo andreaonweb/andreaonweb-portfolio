@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,400..900,0..100,0..1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,400..900,0..100,0..1&family=Press+Start+2P&display=swap');
 
 :root {
   --color-bg: #14120f;
@@ -21,6 +21,7 @@
   --font-main: 'Space Grotesk', sans-serif;
   --font-display: 'Archivo Black', 'Space Grotesk', sans-serif;
   --font-retro: 'Fraunces', Georgia, serif;
+  --font-pixel: 'Press Start 2P', var(--font-mono);
   --radius: 20px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }

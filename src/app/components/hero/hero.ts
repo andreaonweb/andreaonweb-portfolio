@@ -15,6 +15,14 @@ export class HeroComponent {
   readonly words = ['IA aplicada', 'Angular', 'React', 'Spring Boot', 'Python'];
   readonly wordIndex = signal(0);
 
+  // Sprites pixel (cada fila de la matriz es una fila de píxeles; dos fotogramas por marciano)
+  readonly invaderRows = [
+    { w: 8, a: toPath(SQUID_A), b: toPath(SQUID_B) },
+    { w: 11, a: toPath(CRAB_A), b: toPath(CRAB_B) },
+  ];
+  readonly invaderCols = Array.from({ length: 8 });
+  readonly buttons = ['var(--color-accent-4)', 'var(--color-accent-2)', 'var(--color-accent-3)', 'var(--color-accent)'];
+
   private el = inject<ElementRef<HTMLElement>>(ElementRef);
 
   constructor() {
@@ -93,4 +101,16 @@ export class HeroComponent {
 
     gsap.to(root.querySelector('.hero-inner'), { yPercent: 18, opacity: 0, scale: 0.94, ease: 'none', scrollTrigger: trigger });
   }
+}
+
+const SQUID_A = ['...XX...', '..XXXX..', '.XXXXXX.', 'XX.XX.XX', 'XXXXXXXX', '..X..X..', '.X.XX.X.', 'X.X..X.X'];
+const SQUID_B = ['...XX...', '..XXXX..', '.XXXXXX.', 'XX.XX.XX', 'XXXXXXXX', '.X.XX.X.', 'X......X', '.X....X.'];
+const CRAB_A = ['..X.....X..', '...X...X...', '..XXXXXXX..', '.XX.XXX.XX.', 'XXXXXXXXXXX', 'X.XXXXXXX.X', 'X.X.....X.X', '...XX.XX...'];
+const CRAB_B = ['..X.....X..', 'X..X...X..X', 'X.XXXXXXX.X', 'XXX.XXX.XXX', 'XXXXXXXXXXX', '.XXXXXXXXX.', '..X.....X..', '.X.......X.'];
+
+/** Convierte una matriz de 'X' en un path SVG de cuadrados 1×1. */
+function toPath(rows: string[]): string {
+  return rows
+    .flatMap((row, y) => [...row].map((c, x) => (c === 'X' ? `M${x} ${y}h1v1h-1z` : '')))
+    .join('');
 }
