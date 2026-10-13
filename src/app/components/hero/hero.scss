@@ -51,40 +51,22 @@ section {
   }
 }
 
-// Formación de marcianos: marcha de lado a lado a saltos, como el original
-.invaders {
-  position: absolute;
-  top: 136px;
-  left: 50%;
-  width: min(460px, 70vw);
-  margin-left: calc(min(460px, 70vw) / -2);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  opacity: 0.13;
-  animation: march 8s steps(8) infinite alternate;
-}
-
-.invader-row {
-  display: flex;
-  justify-content: space-between;
-
-  &:first-child { color: var(--color-accent); }
-  &:last-child { color: var(--color-accent-3); }
-}
-
+// Marcianos sueltos: cada uno salta de lado a lado y alterna fotogramas, desfasados entre sí
 .invader {
-  height: clamp(14px, 2.6vw, 22px);
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  height: clamp(14px, 2vw, 22px);
   width: auto;
-  fill: currentColor;
+  fill: var(--c);
+  opacity: 0.16;
   overflow: visible;
+  animation: hop 4s steps(4) infinite alternate;
+  animation-delay: var(--d);
 
-  .frame-b { visibility: hidden; }
+  .frame-a { animation: frame 1s steps(1) infinite; }
+  .frame-b { visibility: hidden; animation: frame 1s steps(1) infinite reverse; }
 }
-
-// Alterna fotogramas (la animación cambia de 'visibility' a saltos)
-.invader .frame-a { animation: frame 1s steps(1) infinite; }
-.invader .frame-b { animation: frame 1s steps(1) infinite reverse; }
 
 // Panel de mandos: joystick y botones pegados a los lados, alineados con el HUD
 .controls {
@@ -169,9 +151,9 @@ section {
   opacity: 0.6;
 }
 
-@keyframes march {
-  from { transform: translateX(-12%); }
-  to { transform: translateX(12%); }
+@keyframes hop {
+  from { transform: translate(-50%, 0); }
+  to { transform: translate(calc(-50% + 24px), 6px); }
 }
 
 @keyframes frame {
@@ -202,6 +184,11 @@ section {
   }
 }
 
+// Hasta tablet el texto ya roza los márgenes: solo quedan los marcianos pegados al borde
+@media (max-width: 1024px) {
+  .invader.desktop-only { display: none; }
+}
+
 // Pantallas estrechas: menos HUD y panel más compacto para no saturar
 @media (max-width: 640px) {
   .hud {
@@ -213,14 +200,11 @@ section {
   .hud-2up { display: none; }
   .hud-bottom { bottom: 28px; }
 
-  // Aquí la formación queda detrás del título: más tenue y con menos columnas
-  .invaders {
-    top: 116px;
-    gap: 10px;
-    opacity: 0.09;
+  // Más pequeños y tenues: aquí el texto ocupa casi todo el ancho
+  .invader {
+    height: 12px;
+    opacity: 0.12;
   }
-
-  .invader:nth-child(n + 7) { display: none; }
 
   .controls {
     bottom: 64px;
