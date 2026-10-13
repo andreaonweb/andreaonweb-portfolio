@@ -14,9 +14,20 @@ interface Project {
   icon: string;
   badge: string | null;
   image: string;
+  /** Capturas para el carrusel del modal (sacadas de los README de los repos) */
+  gallery: Shot[];
   vercel: string | null;
   repos: { label: string; url: string }[];
 }
+
+interface Shot {
+  src: string;
+  caption: string;
+}
+
+/** Monta la galería a partir de la carpeta del proyecto: projects/<slug>/01.webp, 02.webp... */
+const shots = (slug: string, captions: string[]): Shot[] =>
+  captions.map((caption, i) => ({ src: `projects/${slug}/${String(i + 1).padStart(2, '0')}.webp`, caption }));
 
 type Filter = 'all' | 'Personal' | 'Colaborativo' | 'demo';
 
@@ -37,6 +48,7 @@ export class ProjectsComponent {
       icon: 'code',
       badge: null,
       image: 'projects/nemblex.jpg',
+      gallery: shots('nemblex', ['Listado de incidencias', 'Detalle con clasificación de la IA', 'Cola de aprobaciones', 'Mis tickets', 'Inicio de sesión']),
       vercel: null,
       repos: [
         { label: 'Repositorio', url: 'https://github.com/andreaonweb/nemblex-it' }
@@ -50,6 +62,7 @@ export class ProjectsComponent {
       icon: 'medical',
       badge: 'Semifinalistas',
       image: 'projects/recuerdamed.jpg',
+      gallery: shots('recuerdamed', ['Inicio', 'Recordatorios y medicación pendiente', 'Lista de medicación', 'Añadir medicación', 'Próximas tomas']),
       vercel: null,
       repos: [
         { label: 'Repo front', url: 'https://github.com/andreaonweb/RecuerdaMed-FrontEnd' },
@@ -64,6 +77,7 @@ export class ProjectsComponent {
       icon: 'paws',
       badge: null,
       image: 'projects/theshireofpaws.png',
+      gallery: shots('theshireofpaws', ['Portada', 'Galería con filtros', 'Ficha de un perro', 'Admin: perfiles de perros', 'Admin: solicitudes de adopción']),
       vercel: null,
       repos: [
         { label: 'Repo front', url: 'https://github.com/TheShireOfPaws/TheShireOfPaws-Frontend' },
@@ -78,6 +92,7 @@ export class ProjectsComponent {
       icon: 'controller',
       badge: null,
       image: 'projects/savepoint.png',
+      gallery: shots('savepoint', ['Biblioteca', 'Recomendaciones', 'Reseñas', 'Perfil', 'Amigos', 'Chat', 'Registro e inicio de sesión']),
       vercel: 'https://savepoint-frontend.onrender.com',
       repos: [
         { label: 'Repositorio', url: 'https://github.com/SavePoint-App/SavePoint-App' }
@@ -91,6 +106,7 @@ export class ProjectsComponent {
       icon: 'social',
       badge: null,
       image: 'projects/reverso.png',
+      gallery: shots('reverso', ['Portada', 'Servicios', 'Formulario de contacto', 'Recursos descargables', 'Vista móvil']),
       vercel: 'https://reverso-social-web.vercel.app',
       repos: [
         { label: 'Repo front', url: 'https://github.com/andreaonweb/reverso-social-fe' },
@@ -105,6 +121,7 @@ export class ProjectsComponent {
       icon: 'calendar',
       badge: null,
       image: 'projects/codecrafters.png',
+      gallery: shots('codecrafters', ['Landing', 'Búsqueda de eventos', 'Detalle de un evento', 'Crear evento', 'Secciones de la landing']),
       vercel: null,
       repos: [
         { label: 'Repo front', url: 'https://github.com/andreaonweb/CodeCrafters-Frontend' },
@@ -119,6 +136,7 @@ export class ProjectsComponent {
       icon: 'cake',
       badge: null,
       image: 'projects/ko-patisserie.jpg',
+      gallery: shots('ko-patisserie', ['Inicio', 'Carta', 'Mis pedidos', 'Cómo llegar', 'Chat de ayuda', 'Admin: productos', 'Admin: pedidos', 'Admin: chat', 'Vista móvil']),
       vercel: 'https://ko-patisserie-front.onrender.com',
       repos: [
         { label: 'Repositorio', url: 'https://github.com/andreaonweb/KO_Patisserie' }
@@ -132,6 +150,7 @@ export class ProjectsComponent {
       icon: 'chat',
       badge: null,
       image: 'projects/chat.png',
+      gallery: shots('chat', ['Pantalla de inicio', 'Sala de chat', 'Invitar a una sala', 'Conversación']),
       vercel: 'https://chat-frontend-7dwn.onrender.com',
       repos: [
         { label: 'Repositorio', url: 'https://github.com/andreaonweb/chat-ws' }
@@ -145,6 +164,7 @@ export class ProjectsComponent {
       icon: 'quote',
       badge: null,
       image: 'projects/garden-of-thoughts.jpg',
+      gallery: [{ src: 'projects/garden-of-thoughts.jpg', caption: 'Portada' }, ...shots('garden-of-thoughts', ['Vista de escritorio y móvil'])],
       vercel: 'https://garden-of-thoughts-app.vercel.app',
       repos: [
         { label: 'Repositorio', url: 'https://github.com/andreaonweb/Garden-Of-Thoughts' }
@@ -161,12 +181,15 @@ export class ProjectsComponent {
 
   readonly filter = signal<Filter>('all');
   readonly selected = signal<Project | null>(null);
+  readonly slide = signal(0);
 
   @ViewChild('modal') private modal?: ElementRef<HTMLDialogElement>;
+  @ViewChild('track') private track?: ElementRef<HTMLElement>;
 
   private host = inject<ElementRef<HTMLElement>>(ElementRef);
   private cdr = inject(ChangeDetectorRef);
   private opener: HTMLElement | null = null;
+  private scrollTimer?: ReturnType<typeof setTimeout>;
 
   matches(p: Project, f: Filter = this.filter()): boolean {
     if (f === 'all') return true;
@@ -208,6 +231,7 @@ export class ProjectsComponent {
   open(p: Project, event: Event): void {
     this.opener = event.currentTarget as HTMLElement;
     this.selected.set(p);
+    this.slide.set(0);
     this.cdr.detectChanges();
 
     const dialog = this.modal?.nativeElement;
@@ -232,6 +256,35 @@ export class ProjectsComponent {
     document.body.style.overflow = '';
     this.selected.set(null);
     this.opener?.focus();
+  }
+
+  /** Lleva el carrusel a la captura i (con vuelta al principio/final). */
+  goTo(i: number): void {
+    const track = this.track?.nativeElement;
+    const total = this.selected()?.gallery.length ?? 0;
+    if (!track || !total) return;
+
+    const next = (i + total) % total;
+    this.slide.set(next);
+    track.scrollTo({ left: next * track.clientWidth, behavior: reducedMotion() ? 'auto' : 'smooth' });
+  }
+
+  // El carrusel se puede deslizar con el dedo: el índice se deduce del scroll cuando
+  // éste se detiene (si no, un salto de 1 a 9 pasaría por todas las capturas intermedias)
+  onTrackScroll(): void {
+    clearTimeout(this.scrollTimer);
+    this.scrollTimer = setTimeout(() => {
+      const track = this.track?.nativeElement;
+      if (!track) return;
+      this.slide.set(Math.round(track.scrollLeft / track.clientWidth));
+    }, 120);
+  }
+
+  onGalleryKey(event: KeyboardEvent): void {
+    if (event.key === 'ArrowLeft') this.goTo(this.slide() - 1);
+    else if (event.key === 'ArrowRight') this.goTo(this.slide() + 1);
+    else return;
+    event.preventDefault();
   }
 
   onBackdrop(event: MouseEvent): void {

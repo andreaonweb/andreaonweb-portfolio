@@ -377,8 +377,8 @@
 
 .modal-inner {
   position: relative;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  display: flex;
+  flex-direction: column;
   max-height: calc(100dvh - 48px);
   overflow: auto;
   border: 1px solid var(--color-border);
@@ -387,16 +387,117 @@
   text-align: left;
 }
 
-.modal-media {
+// ── Carrusel de capturas (arriba del modal, en horizontal) ──
+.gallery {
+  position: relative;
+  flex: none;
   background: var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border);
+}
 
+.gallery-track {
+  display: flex;
+  aspect-ratio: 16 / 9;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.gallery-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  // Fila y columna acotadas para que una captura vertical no estire el carrusel
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  // Hueco lateral para que las flechas no tapen la captura
+  padding: 18px 64px 0;
+
+  // Las capturas tienen proporciones distintas: se ven enteras, sin recortar
   img {
-    width: 100%;
-    height: 100%;
-    min-height: 260px;
-    object-fit: cover;
-    object-position: left top;
-    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.gallery-nav {
+  position: absolute;
+  top: calc(50% - 22px);
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(27, 24, 19, 0.8);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 1.6rem;
+  line-height: 1;
+  padding-bottom: 3px;
+  transition: background 0.3s, color 0.3s;
+
+  &:hover {
+    background: var(--color-accent-2);
+    color: var(--color-ink);
+  }
+
+  &.prev { left: 11px; }
+  &.next { right: 11px; }
+}
+
+.gallery-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+  padding: 12px 20px 14px;
+}
+
+.gallery-caption {
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+}
+
+.gallery-count {
+  margin-right: 8px;
+  font-family: var(--font-mono);
+  color: var(--color-accent-2);
+}
+
+.gallery-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+
+  // Área táctil de 24px con el punto dibujado dentro
+  button {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      transition: background 0.3s, width 0.3s var(--ease-out);
+    }
+
+    &:hover::before { background: var(--color-muted); }
+
+    &.active::before {
+      width: 18px;
+      border-radius: 4px;
+      background: var(--color-accent-2);
+    }
   }
 }
 
@@ -496,13 +597,29 @@
 }
 
 @media (max-width: 720px) {
-  .modal-inner {
-    grid-template-columns: 1fr;
+  .gallery-track {
+    aspect-ratio: 4 / 3;
   }
 
-  .modal-media img {
-    min-height: 0;
-    aspect-ratio: 16 / 10;
+  .gallery-slide {
+    padding: 12px 46px 0;
+  }
+
+  .gallery-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+
+    &.prev { left: 5px; }
+    &.next { right: 5px; }
+  }
+
+  .gallery-bar {
+    padding: 10px 14px 12px;
+  }
+
+  .modal-body {
+    padding: 24px 20px 22px;
   }
 }
 

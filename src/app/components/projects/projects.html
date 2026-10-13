@@ -68,8 +68,37 @@
       <div class="modal-inner">
         <button type="button" class="modal-close" (click)="close()" aria-label="Cerrar">×</button>
 
-        <div class="modal-media">
-          <img [src]="p.image" [alt]="'Captura de ' + p.name" />
+        <!-- Carrusel de capturas: botones, flechas del teclado o deslizar con el dedo -->
+        <div class="gallery" role="group" aria-roledescription="carrusel" [attr.aria-label]="'Capturas de ' + p.name"
+          (keydown)="onGalleryKey($event)">
+          <div class="gallery-track" #track (scroll)="onTrackScroll()">
+            @for (shot of p.gallery; track shot.src; let i = $index) {
+              <figure class="gallery-slide" role="group" aria-roledescription="captura"
+                [attr.aria-label]="(i + 1) + ' de ' + p.gallery.length" [attr.aria-hidden]="i !== slide()">
+                <img [src]="shot.src" [alt]="p.name + ': ' + shot.caption" [attr.loading]="i === 0 ? 'eager' : 'lazy'" />
+              </figure>
+            }
+          </div>
+
+          @if (p.gallery.length > 1) {
+            <button type="button" class="gallery-nav prev" (click)="goTo(slide() - 1)" aria-label="Captura anterior">‹</button>
+            <button type="button" class="gallery-nav next" (click)="goTo(slide() + 1)" aria-label="Captura siguiente">›</button>
+          }
+
+          <div class="gallery-bar">
+            <p class="gallery-caption" aria-live="polite">
+              <span class="gallery-count">{{ slide() + 1 }} / {{ p.gallery.length }}</span>
+              {{ p.gallery[slide()]?.caption }}
+            </p>
+            @if (p.gallery.length > 1) {
+              <div class="gallery-dots">
+                @for (shot of p.gallery; track shot.src; let i = $index) {
+                  <button type="button" [class.active]="i === slide()" [attr.aria-current]="i === slide()"
+                    [attr.aria-label]="'Ver captura ' + (i + 1) + ': ' + shot.caption" (click)="goTo(i)"></button>
+                }
+              </div>
+            }
+          </div>
         </div>
 
         <div class="modal-body">
