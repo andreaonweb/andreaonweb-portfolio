@@ -1,4 +1,4 @@
-// ── Escenario: ordenador · texto · ficha ─────────────────
+// ── Escenario: Gandalf · texto · ficha ─────────────────
 .about-stage {
   display: grid;
   grid-template-columns: 240px 1fr 240px;
@@ -31,54 +31,99 @@
   .buddy-svg {
     display: block;
     width: 100%;
+    max-width: 224px;
     height: auto;
+    margin-inline: auto;
     overflow: visible;
   }
 
+  // Respira a saltos de píxel, como un sprite de videojuego
   .body {
-    animation: bob 2.6s ease-in-out infinite;
+    animation: bob 2.4s steps(1) infinite;
   }
 
   .shadow {
     fill: rgba(0, 0, 0, 0.45);
     transform-box: fill-box;
     transform-origin: center;
-    animation: shadow 2.6s ease-in-out infinite;
+    animation: shadow 2.4s steps(1) infinite;
   }
 
-  .eyes ellipse {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: blink 4.2s infinite;
+  .orb {
+    filter: drop-shadow(0 0 1.5px #fff4c2) drop-shadow(0 0 3px rgba(232, 181, 60, 0.8));
+    animation: orb 1.8s ease-in-out infinite;
   }
 
-  .pupils {
-    transition: transform 0.15s ease-out;
+  .lid {
+    opacity: 0;
+    animation: blink 4.2s steps(1) infinite;
   }
 
-  .led {
-    animation: led 1.6s steps(1) infinite;
-  }
-
-  .happy-eyes,
-  .mouth-open {
+  .brows-angry {
     opacity: 0;
   }
 
-  // Al hacer clic: ojos ^^, boca abierta y salto
-  &.happy {
-    .eyes,
-    .mouth {
+  .bubble {
+    position: absolute;
+    z-index: 3;
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 6px;
+    padding: 8px 12px;
+    border: 3px solid var(--color-ink);
+    background: var(--color-paper);
+    box-shadow: 4px 4px 0 var(--color-accent-2);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(-50%, 8px) scale(0.6);
+    transition: opacity 0.2s, transform 0.3s var(--ease-out);
+    pointer-events: none;
+
+    // Piquito pixel apuntando a Gandalf
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      margin: -2px 0 0 -5px;
+      background: var(--color-paper);
+      border-right: 3px solid var(--color-ink);
+      border-bottom: 3px solid var(--color-ink);
+      transform: rotate(45deg);
+    }
+  }
+
+  // Al hacer clic: ceño fruncido, bastonazo, destello y "¡No puedes pasar!"
+  &.cast {
+    .brows {
       opacity: 0;
     }
 
-    .happy-eyes,
-    .mouth-open {
+    .brows-angry {
       opacity: 1;
     }
 
+    .lid {
+      animation: none;
+    }
+
     .buddy-svg {
-      animation: jump 0.6s var(--ease-out);
+      animation: slam 0.5s var(--ease-out);
+    }
+
+    .orb {
+      animation: flash 0.9s ease-out;
+    }
+
+    .bubble {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
     }
   }
 }
@@ -86,7 +131,6 @@
 .floaty {
   position: absolute;
   z-index: 1;
-  font-family: var(--font-mono);
   font-weight: 700;
   pointer-events: none;
   animation: floaty 5s ease-in-out infinite;
@@ -97,36 +141,44 @@
   &.f4 { top: 52%; left: -10%; color: var(--color-accent-3); font-size: 1.4rem; animation-delay: -3.8s; }
 }
 
-// Corazones que crea about.ts al hacer clic (fuera del encapsulado de Angular)
-:host ::ng-deep .heart {
+// Chispas que crea about.ts al hacer clic (fuera del encapsulado de Angular)
+:host ::ng-deep .spark {
   position: absolute;
   z-index: 2;
-  color: var(--color-accent-4);
-  font-size: 1.3rem;
+  color: var(--color-accent-2);
+  font-size: 1.2rem;
+  text-shadow: 0 0 8px rgba(232, 181, 60, 0.8);
   pointer-events: none;
-  animation: heart 1s var(--ease-out) forwards;
+  animation: spark 1s var(--ease-out) forwards;
 }
 
 @keyframes bob {
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-1px); }
 }
 
 @keyframes shadow {
-  50% { transform: scaleX(0.8); opacity: 0.6; }
+  50% { transform: scaleX(0.85); opacity: 0.6; }
 }
 
 @keyframes blink {
-  0%, 92%, 100% { transform: scaleY(1); }
-  95% { transform: scaleY(0.1); }
+  0%, 93%, 97%, 100% { opacity: 0; }
+  94%, 96% { opacity: 1; }
 }
 
-@keyframes led {
-  50% { opacity: 0.25; }
+@keyframes orb {
+  50% { opacity: 0.6; }
 }
 
-@keyframes jump {
-  30% { transform: translateY(-18px) rotate(-4deg); }
-  60% { transform: translateY(0) rotate(3deg); }
+@keyframes flash {
+  0% { filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 10px #fff4c2) drop-shadow(0 0 22px rgba(232, 181, 60, 0.9)); }
+  100% { filter: drop-shadow(0 0 1.5px #fff4c2) drop-shadow(0 0 3px rgba(232, 181, 60, 0.8)); }
+}
+
+@keyframes slam {
+  25% { transform: translateY(-14px); }
+  50% { transform: translateY(3px) scaleY(0.97); }
+  75% { transform: translateX(-3px); }
+  90% { transform: translateX(3px); }
 }
 
 @keyframes floaty {
@@ -134,17 +186,18 @@
   50% { transform: translateY(-14px) rotate(8deg); opacity: 1; }
 }
 
-@keyframes heart {
+@keyframes spark {
   from { transform: translate(-50%, 0) scale(0.4); opacity: 1; }
-  to { transform: translate(calc(-50% + var(--dx)), -70px) scale(1.2); opacity: 0; }
+  to { transform: translate(calc(-50% + var(--dx)), -80px) scale(1.2) rotate(90deg); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .buddy .body,
   .buddy .shadow,
-  .buddy .eyes ellipse,
-  .buddy .led,
-  .buddy.happy .buddy-svg,
+  .buddy .orb,
+  .buddy .lid,
+  .buddy.cast .buddy-svg,
+  .buddy.cast .orb,
   .floaty {
     animation: none;
   }

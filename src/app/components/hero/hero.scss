@@ -8,19 +8,95 @@ section {
   overflow: hidden;
 }
 
-// Rayos retro tipo "sunburst" que se desvanecen hacia los bordes
-.hero-rays {
+// Estrellas pixel: dos capas con tamaños de mosaico primos para que no se note la repetición
+.hero-stars {
   position: absolute;
-  inset: 0;
-  background: repeating-conic-gradient(
-    from 0deg at 50% 58%,
-    rgba(232, 181, 60, 0.07) 0deg 4.5deg,
-    rgba(0, 0, 0, 0.18) 4.5deg 9deg
-  );
-  mask-image: radial-gradient(ellipse 75% 70% at 50% 58%, #000 10%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 58%, #000 10%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
-  opacity: 0.8;
+  inset: 0 0 35%;
   pointer-events: none;
+  mask-image: linear-gradient(#000 30%, transparent);
+  -webkit-mask-image: linear-gradient(#000 30%, transparent);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    animation: twinkle 3.2s steps(2) infinite;
+  }
+
+  &::before {
+    background:
+      radial-gradient(circle, var(--color-paper) 1.2px, transparent 1.6px) 0 0 / 173px 173px,
+      radial-gradient(circle, var(--color-accent-2) 1.2px, transparent 1.6px) 60px 90px / 211px 211px;
+    opacity: 0.7;
+  }
+
+  &::after {
+    background:
+      radial-gradient(circle, var(--color-paper) 1px, transparent 1.4px) 40px 20px / 131px 131px,
+      radial-gradient(circle, var(--color-accent) 1.4px, transparent 1.8px) 110px 70px / 257px 257px;
+    animation-delay: -1.6s;
+    opacity: 0.55;
+  }
+}
+
+// Suelo retro: rejilla en perspectiva que avanza hacia la pantalla
+.hero-grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+  perspective: 320px;
+  perspective-origin: 50% 0;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(transparent, #000 35%, #000 70%, transparent);
+  -webkit-mask-image: linear-gradient(transparent, #000 35%, #000 70%, transparent);
+
+  // Línea de horizonte
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-accent-4) 30%, var(--color-accent-2) 50%, var(--color-accent-4) 70%, transparent);
+    opacity: 0.6;
+    z-index: 1;
+  }
+
+  .grid-plane {
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    top: 0;
+    height: 200%;
+    background-image:
+      linear-gradient(90deg, rgba(169, 125, 194, 0.32) 2px, transparent 2px),
+      linear-gradient(rgba(169, 125, 194, 0.32) 2px, transparent 2px);
+    background-size: 64px 64px;
+    transform: rotateX(72deg);
+    transform-origin: 50% 0;
+    animation: grid-run 2.4s linear infinite;
+  }
+}
+
+@keyframes grid-run {
+  to { background-position: 0 64px; }
+}
+
+@keyframes twinkle {
+  50% { opacity: 0.2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid .grid-plane,
+  .hero-stars::before,
+  .hero-stars::after {
+    animation: none;
+  }
 }
 
 .hero-glow {

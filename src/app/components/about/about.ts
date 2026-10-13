@@ -8,6 +8,75 @@ import { finePointer, reducedMotion } from '../../shared/motion';
 const svg = (body: string) =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
 
+interface Pixel {
+  x: number;
+  y: number;
+  fill: string;
+}
+
+// Gandalf el Gris. H/h sombrero, S/s piel, B/b barba, R/r túnica, T bastón, L luz del bastón, K botas.
+// Ojos y cejas van aparte (about.html) para poder animarlos.
+const WIZARD = [
+  '................HH..........',
+  '...............HH...........',
+  '..............HHh...........',
+  '.............HHHh...........',
+  '.............HHHh...........',
+  '............HHHHhh..........',
+  '............HHHHhh.......L..',
+  '...........HHHHHhh......LLL.',
+  '...........HHHHHHhh......L..',
+  '..........HHHHHHHhh......T..',
+  '..........HHHHHHHHhh.....T..',
+  '.....HHHHHHHHHHHHHHHHhh..T..',
+  '....hhhhhhhhhhhhhhhhhhhh.T..',
+  '.......bBSSSSSSSSSSBb....T..',
+  '.......bBSSSSSSSSSSBb....T..',
+  '.......bBSSSSSSSSSSBb....T..',
+  '.......bBSSSSssSSSSBb....T..',
+  '.......bBBBBSssSBBBBb....T..',
+  '.......bBBBBBBBBBBBBb....T..',
+  '.......bBBBBBbbBBBBBb....T..',
+  '....RRRbBBBBBBBBBBBBbRRR.T..',
+  '...RRRRbBBBBBBBBBBBBbRRRRT..',
+  '...RRRRRbBBBBBBBBBBbRRRRRT..',
+  '..RRRRRRRbBBBBBBBBbRRRRRSSS.',
+  '..RRRRRRRRbBBBBBBbRRRRRRSSS.',
+  '..rRRRRRRRRbBBBBbRRRRRRr.T..',
+  '..rRRRRRRRRRbBBbRRRRRRRr.T..',
+  '..rRRRRRRRRRRbbRRRRRRRRr.T..',
+  '..rRRRRRRRRRRRRRRRRRRRRr.T..',
+  '..rRRRRRRRRRRRRRRRRRRRRr.T..',
+  '..rRRRRRRRRrRRRRRRRRRRRr.T..',
+  '..rRRRRRRRRrRRRRRRRRRRRr.T..',
+  '..rrrrrrrrrrrrrrrrrrrrrr.T..',
+  '.......KKKK.....KKKK.....T..',
+];
+
+const WIZARD_COLORS: Record<string, string> = {
+  H: '#8e8a96',
+  h: '#6c6874',
+  S: '#f0c9a3',
+  s: '#d9a57f',
+  B: '#ece6da',
+  b: '#bdb4a4',
+  R: '#8e8a96',
+  r: '#6c6874',
+  T: '#8a5a35',
+  L: '#fff4c2',
+  K: '#4a3a2a',
+};
+
+function spritePixels(rows: string[], keep: (c: string) => boolean): Pixel[] {
+  const pixels: Pixel[] = [];
+  rows.forEach((row, y) =>
+    [...row].forEach((c, x) => {
+      if (WIZARD_COLORS[c] && keep(c)) pixels.push({ x, y, fill: WIZARD_COLORS[c] });
+    })
+  );
+  return pixels;
+}
+
 @Component({
   selector: 'app-about',
   standalone: true,
@@ -19,6 +88,17 @@ export class AboutComponent {
   private sanitizer = inject(DomSanitizer);
   private el = inject<ElementRef<HTMLElement>>(ElementRef);
   private destroyRef = inject(DestroyRef);
+
+  readonly wizard = {
+    width: WIZARD[0].length,
+    height: WIZARD.length,
+    body: spritePixels(WIZARD, (c) => c !== 'L'),
+    orb: spritePixels(WIZARD, (c) => c === 'L'),
+    eyes: [
+      { x: 10, y: 15 },
+      { x: 16, y: 15 },
+    ],
+  };
 
   readonly interests = [
     {
@@ -118,45 +198,49 @@ export class AboutComponent {
     });
   }
 
-  // Ordenador: se alegra (y suelta corazones) al hacer clic; en escritorio sigue el ratón con la mirada
+  // Gandalf: al hacer clic golpea con el bastón, frunce el ceño y suelta chispas;
+  // en escritorio sigue el ratón con la mirada (la pupila salta de píxel en píxel)
   private setupBuddy(root: HTMLElement): void {
     const buddy = root.querySelector<HTMLElement>('.buddy');
-    const pupils = root.querySelector<SVGGElement>('.buddy .pupils');
-    if (!buddy || !pupils) return;
+    const svgEl = root.querySelector<SVGSVGElement>('.buddy-svg');
+    const pupils = Array.from(root.querySelectorAll<SVGRectElement>('.buddy .pupil'));
+    if (!buddy || !svgEl || !pupils.length) return;
 
-    let happyTimer: ReturnType<typeof setTimeout> | undefined;
+    let castTimer: ReturnType<typeof setTimeout> | undefined;
     const onClick = () => {
-      buddy.classList.remove('happy');
-      void buddy.offsetWidth; // reinicia la animación de salto
-      buddy.classList.add('happy');
-      clearTimeout(happyTimer);
-      happyTimer = setTimeout(() => buddy.classList.remove('happy'), 1400);
+      buddy.classList.remove('cast');
+      void buddy.offsetWidth; // reinicia la animación del golpe
+      buddy.classList.add('cast');
+      clearTimeout(castTimer);
+      castTimer = setTimeout(() => buddy.classList.remove('cast'), 1800);
       if (reducedMotion()) return;
-      for (let i = 0; i < 5; i++) {
-        const heart = document.createElement('span');
-        heart.className = 'heart';
-        heart.textContent = '♥';
-        heart.setAttribute('aria-hidden', 'true');
-        heart.style.left = `${35 + Math.random() * 30}%`;
-        heart.style.top = '20%';
-        heart.style.setProperty('--dx', `${(Math.random() - 0.5) * 90}px`);
-        heart.style.animationDelay = `${i * 70}ms`;
-        heart.addEventListener('animationend', () => heart.remove());
-        buddy.appendChild(heart);
+      for (let i = 0; i < 6; i++) {
+        const spark = document.createElement('span');
+        spark.className = 'spark';
+        spark.textContent = i % 2 ? '✧' : '✦';
+        spark.setAttribute('aria-hidden', 'true');
+        spark.style.left = `${86 + (Math.random() - 0.5) * 10}%`;
+        spark.style.top = '18%';
+        spark.style.setProperty('--dx', `${(Math.random() - 0.5) * 110}px`);
+        spark.style.animationDelay = `${i * 60}ms`;
+        spark.addEventListener('animationend', () => spark.remove());
+        buddy.appendChild(spark);
       }
     };
     buddy.addEventListener('click', onClick);
+
+    // Por defecto mira hacia el texto (a la derecha y abajo)
+    const look = (dx: number, dy: number) => pupils.forEach((p) => p.setAttribute('transform', `translate(${dx} ${dy})`));
+    look(1, 1);
 
     let frame = 0;
     const onMove = (e: PointerEvent) => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        const r = buddy.getBoundingClientRect();
-        const dx = e.clientX - (r.left + r.width / 2);
-        const dy = e.clientY - (r.top + r.height * 0.38);
-        const angle = Math.atan2(dy, dx);
-        const dist = Math.min(5, Math.hypot(dx, dy) / 40);
-        pupils.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px)`;
+        const r = svgEl.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width * 0.48);
+        const dy = e.clientY - (r.top + r.height * 0.42);
+        look(dx > 0 ? 1 : 0, dy > 0 ? 1 : 0);
       });
     };
     if (finePointer() && !reducedMotion()) window.addEventListener('pointermove', onMove, { passive: true });
@@ -165,7 +249,7 @@ export class AboutComponent {
       buddy.removeEventListener('click', onClick);
       window.removeEventListener('pointermove', onMove);
       cancelAnimationFrame(frame);
-      clearTimeout(happyTimer);
+      clearTimeout(castTimer);
     });
   }
 
